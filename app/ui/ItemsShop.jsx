@@ -30,13 +30,15 @@ const ItemsShop = async ({ shop }) => {
                                         :
                                         <div className='relative w-full h-full '>
 
-                                            <Image
+                                            {/* <Image
                                                 src={child.displayAssets[0].background}
                                                 alt={`image_${child.displayName}`}
                                                 width={300}
                                                 height={300}
                                                 className='w-full h-full rounded-md'
-                                                quality={70} />
+                                                quality={70} /> */}
+                                            
+                                            <img src={child.displayAssets[0].background} alt={`image_${child.displayName}`} className='w-full h-full rounded-md' />
                                             <BackgroundCard displayName={child.displayName} price={child.price.regularPrice}/>
                                         </div>
 

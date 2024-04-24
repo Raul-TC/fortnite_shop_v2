@@ -9,14 +9,15 @@ const ImageSlider = ({ displayName, arrayImages, isItem = false, price }) => {
   return (
     <>
       {imagesMemo.map((el, index) => (
-          <Image
-            key={`_${index}${displayName}`}
-            width={300}
-            height={300}
-            quality={70}
-            src={el.background}
-            alt={`${el.materialInstance}_${index}`}
-            className={`transition-all duration-500 ${counter === index ? 'w-full h-full ' : 'hidden'} rounded-md `}        />
+          // <Image
+          //   key={`_${index}${displayName}`}
+          //   width={300}
+          //   height={300}
+          //   quality={70}
+          //   src={el.background}
+          //   alt={`${el.materialInstance}_${index}`}
+        //   className={`transition-all duration-500 ${counter === index ? 'w-full h-full ' : 'hidden'} rounded-md `}        />
+        <img  key={`_${index}${displayName}`} src={el.background} alt={`${el.materialInstance}_${index}`} className={`transition-all duration-500 ${counter === index ? 'w-full h-full ' : 'hidden'} rounded-md `}/>
       ))}
       {!isItem && <>
       <BackgroundCard displayName={displayName} price={price}/>
