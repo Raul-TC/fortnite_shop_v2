@@ -8,32 +8,29 @@ import { getData } from '../lib/useFetchData'
 import { URL_SHOP } from '@/KEY'
 
 export const metadata = {
-  title: "Tienda Fortnite HOY",
-  description: "Fornite Shop Today",
+  title: 'Tienda Fortnite HOY',
+  description: 'Fornite Shop Today',
   icons: { shortcut: 'https://cdn.marketing.on.epicgames.com/fortnite/webpack/../favicon.ico' },
   facebook: {
     card: '',
     title: 'Tienda de HOY Fortnite',
     description: 'Tienda Actualizada de la tienda de fortnite'
   }
-};
+}
 
-export default async function Home() {
-
-  const promise = await getData(false,true,URL_SHOP)
+export default async function Home () {
+  const promise = await getData(false, true, URL_SHOP)
 
   return (
     <>
 
-      {/* <CountDown isShop={true}/> */}
+      <CountDown isShop date={false} />
       <Suspense fallback={<SkeletonCards />}>
         <Await promise={promise}>
           {({ res }) => <ItemsShop shop={res} />}
         </Await>
       </Suspense>
 
-
     </>
   )
 }
-

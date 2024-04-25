@@ -1,7 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 
-const HeadPage = (darkTheme,{ title = 'Tienda de hoy Fortnite' }) => {
+const HeadPage = (darkTheme, { title = 'Tienda de hoy Fortnite' }) => {
   let lsTheme
   if (typeof window !== 'undefined') lsTheme = window.localStorage.getItem('theme')
   return (
