@@ -39,21 +39,20 @@ const BattlePass = ({ bpass, currentPage }) => {
           <h2 className='text-2xl text-center font-bold mt-4 mb-4 md:text-3xl'> Página {item.page}</h2>
           <div className='text-center grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3 grid-flow-dense h-full w-full'>
             {item.data.map((pag, index) => (
-              <Link key={`${pag.offerId}_${index}`} href={`/shop/${pag.item.id}`}>
-                <div className='relative w-full h-full '>
+              // <Link key={`${pag.offerId}_${index}`} href={`/shop/${pag.item.id}`}>
+              <div key={`${pag.offerId}_${index}`} className='relative w-full h-full '>
 
-                  <img
-                    src={pag.item.images.background || pag.item.images.icon}
-                    alt={`image_${pag.item.name}`}
-                    width={300}
-                    height={300}
-                    className='w-full h-full rounded-md'
-                    // quality={70}
-                  />
-                  <BackgroundCard displayName={pag.item.name} />
-                </div>
+                <img
+                  src={pag.item.images.background || pag.item.images.icon}
+                  alt={`image_${pag.item.name}`}
+                  width={300}
+                  height={300}
+                  className='w-full h-full rounded-md'
+                />
+                <BackgroundCard displayName={pag.item.name} />
+              </div>
 
-              </Link>
+              // </Link>
             ))}
           </div>
         </section>

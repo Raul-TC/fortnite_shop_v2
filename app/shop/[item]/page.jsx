@@ -38,7 +38,7 @@ const Item = async ({ params }) => {
                       : skin.displayAssets.length > 0 || skin.images.full_background
                         ? <div className='relative w-full h-full '>
                           <img
-                            src={skin.displayAssets.length > 0 ? skin.displayAssets[0].background : skin.images.full_background}
+                            src={skin.displayAssets.length > 0 ? skin.displayAssets[0].background : skin.images.background}
                             width={350}
                             height={350}
                             // quality={85}
