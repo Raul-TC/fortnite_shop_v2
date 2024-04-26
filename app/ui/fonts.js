@@ -1,3 +1,4 @@
+// eslint-disable-next-line camelcase
 import { Montserrat, Luckiest_Guy } from 'next/font/google'
 
 export const montserrat = Montserrat({
