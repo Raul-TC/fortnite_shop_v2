@@ -1,16 +1,17 @@
 const KEY_LOGIN = process.env.API_FORTNITE
-
-export async function getData(isBattlePass = false, formatedShop = false, url) {
+const KEY_2 = process.env.API_FORTNITEV2
+export async function getData (isBattlePass = false, formatedShop = false, url) {
   try {
     const fetchShop = await fetch(url, {
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': KEY_LOGIN
+        // 'Content-Type': 'application/json',
+        Authorization: KEY_2
       },
-      next: { cache: 'no-store' },
+      next: { cache: 'no-store' }
     })
+    console.log(fetchShop)
     if (!fetchShop.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error(`Error: ${fetchShop.status} ${fetchShop.statusText}`)
     }
     const shop = await fetchShop.json()
     let res = shop
@@ -27,7 +28,6 @@ export async function getData(isBattlePass = false, formatedShop = false, url) {
           const datt = dataFiltered[item.section.name].map(ab => ab.mainId === item.id)
 
           !datt.includes(true) && dataFiltered[item.section.name].push({ ...item })
-
         }
       })
       const arr = Object.entries(dataFiltered).map(([key, value]) => ({ section: key, data: value }))
@@ -35,19 +35,15 @@ export async function getData(isBattlePass = false, formatedShop = false, url) {
       res = arr
     }
 
-
     if (isBattlePass) {
       const pagesBattlePass = {}
       const pages = [...new Set(res.rewards.map((item) => item.page))]
 
       pages.forEach(el => pagesBattlePass[el] = [])
       res.rewards.map(el => {
-
         const datt = pagesBattlePass[el.page].map(ab => ab.offerId === el.offerId)
 
         !datt.includes(true) && pagesBattlePass[el.page].push({ ...el })
-
-
       })
 
       let arr = Object.entries(pagesBattlePass).map(([key, value]) => ({ page: key, data: value }))
@@ -56,10 +52,8 @@ export async function getData(isBattlePass = false, formatedShop = false, url) {
       res = arr
     }
     return { status: fetchShop.ok, res }
-
   } catch (error) {
+    console.log(error)
     return { error }
   }
-
-
 }

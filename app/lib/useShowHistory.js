@@ -1,4 +1,3 @@
-"use client"
 import { useEffect, useState } from 'react'
 
 export function useShowHistory (item) {
@@ -6,9 +5,13 @@ export function useShowHistory (item) {
   const [reversedHistory, setReversedHistory] = useState([])
 
   useEffect(() => {
-    const clone = item.shopHistory ? item.shopHistory.slice(0).reverse() : null
+    if (item.shopHistory.length > 0) {
+      const clone = item.shopHistory ? item.shopHistory.slice(0).reverse() : null
 
-    setReversedHistory(clone)
+      const fechasLocales = clone.map(fecha => new Date(fecha))
+
+      setReversedHistory(fechasLocales)
+    }
   }, [item.shopHistory])
 
   const handleShowHistory = () => {

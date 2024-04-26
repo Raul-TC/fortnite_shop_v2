@@ -1,13 +1,12 @@
 import { useCallback } from 'react'
 import { useDates } from './useDates'
 
-export function useGetDay() {
-
-  
-  const {currentShop} = useDates()
+export function useGetDay () {
+  const { currentShop } = useDates()
   const currentDate = new Date(currentShop).toLocaleDateString()
 
   const getDay = useCallback((dia) => {
+    console.log(dia)
     const currentDayNow = new Date(dia)
     const day = currentDayNow.getDay()
     const month = currentDayNow.getMonth()
@@ -22,7 +21,7 @@ export function useGetDay() {
       6: 'Sábado'
     }
     const months = {
-       0: 'Enero',
+      0: 'Enero',
       1: 'Febrero',
       2: 'Marzo',
       3: 'Abril',
