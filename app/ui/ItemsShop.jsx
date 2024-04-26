@@ -1,7 +1,5 @@
 import Link from 'next/link'
-import Card from './Card'
 import ImageSlider from './ImageSlider'
-import Image from 'next/image'
 import BackgroundCard from './BackgroundCard'
 const ItemsShop = async ({ shop }) => {
   return (
@@ -19,14 +17,17 @@ const ItemsShop = async ({ shop }) => {
                 >
 
                   {child.displayAssets.length > 1
-                    ? <div className='relative w-full h-full shadow-lg overflow-hidden rounded-md'>
+                    ? (
+                      <div className='relative w-full h-full shadow-lg overflow-hidden rounded-md'>
                         <div className='relative w-full h-full overflow-hidden'>
 
-                            <ImageSlider displayName={child.displayName} arrayImages={child.displayAssets} key={`${index}_${child.mainId}`} price={child.price.regularPrice} />
-                          </div>
+                          <ImageSlider displayName={child.displayName} arrayImages={child.displayAssets} key={`${index}_${child.mainId}`} price={child.price.regularPrice} />
                         </div>
+                      </div>
+                      )
 
-                    : <div className='relative w-full h-full '>
+                    : (
+                      <div className='relative w-full h-full '>
 
                         {/* <Image
                                                 src={child.displayAssets[0].background}
@@ -38,7 +39,8 @@ const ItemsShop = async ({ shop }) => {
 
                         <img src={child.displayAssets[0].background} alt={`image_${child.displayName}`} className='w-full h-full rounded-md' />
                         <BackgroundCard displayName={child.displayName} price={child.price.regularPrice} />
-                        </div>}
+                      </div>
+                      )}
                 </Link>
               )
               )

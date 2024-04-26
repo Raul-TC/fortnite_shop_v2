@@ -23,14 +23,14 @@ const History = ({ item }) => {
                                 <DateComponent fullDate={formatedDate(reversedHistory[1])} dayss={getDays(reversedHistory[1])} />
                                 <DateComponent fullDate={formatedDate(reversedHistory[2])} dayss={getDays(reversedHistory[2])} />
                                 {
-                                 showHistory && reversedHistory.slice(3).map(el => <DateComponent key={el} fullDate={formatedDate(el)} days={getDays(el)} />)
+                                 showHistory && reversedHistory.slice(3).map((el, index) => <DateComponent key={index} fullDate={formatedDate(el)} dayss={getDays(el)} />)
                                 }
                               </>
                               )
                             : (
                               <>
-                                <DateComponent fullDate={formatedDate(reversedHistory[0])} dayss={getDays(reversedHistory[0])} length={item.shopHistory.length} />
-                                <DateComponent fullDate={formatedDate(reversedHistory[1])} dayss={getDays(reversedHistory[1])} length={item.shopHistory.length} />
+                                <DateComponent fullDate={formatedDate(reversedHistory[0])} dayss={getDays(reversedHistory[0])} />
+                                <DateComponent fullDate={formatedDate(reversedHistory[1])} dayss={getDays(reversedHistory[1])} />
                               </>)}
                         </div>
                         {item.shopHistory?.length > 3 && <button className=' h-8 font-bold block mt-4 mb-4 rounded-md text-center m-auto md:text-2xl' onClick={handleShowHistory}>{showHistory ? 'Ocultar historial' : 'Ver todo el historial'}</button>}

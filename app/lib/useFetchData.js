@@ -1,11 +1,11 @@
 const KEY_LOGIN = process.env.API_FORTNITE
 const KEY_2 = process.env.API_FORTNITEV2
-export async function getData (isBattlePass = false, formatedShop = false, url) {
+export async function getData (isBattlePass = false, formatedShop = false, url, status = false) {
   try {
     const fetchShop = await fetch(url, {
       headers: {
         // 'Content-Type': 'application/json',
-        Authorization: KEY_2
+        Authorization: status ? KEY_2 : KEY_LOGIN
       },
       next: { cache: 'no-store' }
     })
