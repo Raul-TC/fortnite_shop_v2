@@ -7,7 +7,7 @@ export async function getData (isBattlePass = false, formatedShop = false, url, 
         'Content-Type': 'application/json',
         Authorization: status ? KEY_2 : KEY_LOGIN
       },
-      next: { revalidate: 60 }
+      next: { revalidate: 10 }
     })
     if (!fetchShop.ok) {
       throw new Error(`Error: ${fetchShop.status} ${fetchShop.statusText}`)
