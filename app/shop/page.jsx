@@ -29,7 +29,7 @@ export default async function Home () {
         <Await promise={promise}>
         </Await>
       </Suspense> */}
-      <ItemsShop shop={promise} />
+      <ItemsShop shop={promise.res} />
 
     </>
   )
