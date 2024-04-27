@@ -25,11 +25,11 @@ export default async function Home () {
     <>
 
       <CountDown isShop date={false} />
-      <Suspense fallback={<SkeletonCards />}>
+      {/* <Suspense fallback={<SkeletonCards />}>
         <Await promise={promise}>
-          {({ res }) => <ItemsShop shop={res} />}
         </Await>
-      </Suspense>
+      </Suspense> */}
+      <ItemsShop shop={promise} />
 
     </>
   )
