@@ -4,12 +4,11 @@ export async function getData (isBattlePass = false, formatedShop = false, url, 
   try {
     const fetchShop = await fetch(url, {
       headers: {
-        // 'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
         Authorization: status ? KEY_2 : KEY_LOGIN
       },
       next: { cache: 'no-store' }
     })
-    console.log(fetchShop)
     if (!fetchShop.ok) {
       throw new Error(`Error: ${fetchShop.status} ${fetchShop.statusText}`)
     }
@@ -19,7 +18,13 @@ export async function getData (isBattlePass = false, formatedShop = false, url, 
       const dataFiltered = {}
       const categories = [...new Set(res.shop.map((section) => section.section.name))]
 
-      categories.forEach(el => el === null || el === '' || el === false ? dataFiltered.Destacados = [] : dataFiltered[el] = [])
+      categories.forEach(el => {
+        if (el === null || el === '' || el === false) {
+          dataFiltered.Destacados = []
+        } else {
+          dataFiltered[el] = []
+        }
+      })
 
       res.shop.forEach(item => {
         if (!dataFiltered[item.section.name]) {
@@ -39,8 +44,8 @@ export async function getData (isBattlePass = false, formatedShop = false, url, 
       const pagesBattlePass = {}
       const pages = [...new Set(res.rewards.map((item) => item.page))]
 
-      pages.forEach(el => pagesBattlePass[el] = [])
-      res.rewards.map(el => {
+      pages.forEach(el => { pagesBattlePass[el] = [] })
+      res.rewards.forEach(el => {
         const datt = pagesBattlePass[el.page].map(ab => ab.offerId === el.offerId)
 
         !datt.includes(true) && pagesBattlePass[el.page].push({ ...el })
@@ -53,7 +58,7 @@ export async function getData (isBattlePass = false, formatedShop = false, url, 
     }
     return { status: fetchShop.ok, res }
   } catch (error) {
-    console.log(error)
+    // console.log(error)
     return { error }
   }
 }
