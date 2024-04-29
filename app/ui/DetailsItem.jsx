@@ -22,7 +22,7 @@ const DetailsItem = ({ details }) => {
       <div className={`${details.rarity.id === 'Common' ? 'border-green-500' : ''} ${details.rarity.id === 'Rare' ? 'border-blue-500 ' : ''} ${details.rarity.id === 'Uncommon' ? 'border-gray-500 ' : ''} ${details.rarity.id === 'Epic' ? ' border-purple-500 ' : ''} ${details.rarity.id === 'Legendary' ? ' border-orange-500' : ''} border-b-2 pb-4 relative top-0 left-0 right-0 w-full shadow-md text-4xl font-bold text-center flex flex-col `}>
         <div className='w-28 h-28 rounded-full m-auto overflow-hidden'>
           {/* <img src={details.images.icon} alt='' srcset='' /> */}
-          <img src={details.images.icon ? details.images.icon : details.displayAssets[0].url} alt='' srcset='' />
+          <img src={details.images.icon ? details.images.icon : details.displayAssets[0].url} alt='' />
 
         </div>
         <span className={`${luckiestGuy.className}`}>   {details.name}</span>

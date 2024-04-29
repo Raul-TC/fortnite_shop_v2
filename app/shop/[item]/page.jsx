@@ -1,14 +1,5 @@
-import Image from 'next/image'
-import Link from 'next/link'
 import React, { Suspense } from 'react'
-import { IoArrowBackOutline } from 'react-icons/io5'
 import { URL_ITEM } from '@/KEY'
-import ImageSlider from '../../ui/ImageSlider'
-// import Modal from '../../ui/Modal'
-import History from '../../ui/History'
-import { getData } from '@/app/lib/useFetchData'
-import { MdOutlineImageNotSupported } from 'react-icons/md'
-import BackgroundCard from '@/app/ui/BackgroundCard'
 import DetailsItem from '@/app/ui/DetailsItem'
 import Await from '@/app/ui/Await'
 
@@ -24,7 +15,7 @@ export const dynamicParams = false
 //     description: 'Tienda Actualizada de la tienda de fortnite'
 //   }
 // }
-generateMetadata()
+// generateMetadata()
 export default async function Item ({ params }) {
   const promise = await getItem(params.item)
   // const skin = item
