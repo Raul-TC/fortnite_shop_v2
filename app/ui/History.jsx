@@ -7,7 +7,7 @@ const History = ({ item }) => {
   const { formatedDate, getDays } = useFormatedDate()
 
   return (
-    <div>
+    <div className='w-full'>
       {item.shopHistory && item.shopHistory.length >= 1 && <h1 className='text-center font-bold text-2xl md:text-3xl'>Apariciones en Tienda ({item.shopHistory.length})</h1>}
       {
                 !item.shopHistory
@@ -15,7 +15,7 @@ const History = ({ item }) => {
                   : item.shopHistory.length > 1
                     ? (
                       <>
-                        <div className={`flex flex-row justify-center items-center flex-wrap m-auto text-center ${showHistory && reversedHistory.length >= 7 ? 'overflow-y-scroll h-48 scrollHistory' : ''} w-[260px] md:w-[280px]`}>
+                        <div className={`flex flex-row w-full md:w-96 justify-center items-center flex-wrap m-auto text-center ${showHistory && reversedHistory.length >= 7 ? 'overflow-y-scroll h-48 scrollHistory' : ''} w-[260px]`}>
                           {item.shopHistory.length > 2
                             ? (
                               <>

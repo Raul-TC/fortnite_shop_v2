@@ -1,10 +1,7 @@
 import React, { memo } from 'react'
-import { useCountDown } from '../lib/useCountDown'
 import { useFormatedDate } from '../lib/useFormatedDate'
-import { useGetDay } from '../lib/useGetDay'
 import CurrentDay from './CurrentDay'
 import CountDown from './CountDown'
-import Link from 'next/link'
 import Image from 'next/image'
 import { rewardsFiltered } from '../lib/utils'
 import BackgroundCard from './BackgroundCard'
@@ -12,7 +9,6 @@ const BattlePass = ({ bpass, currentPage }) => {
   const { arr, info, seasonDates, videos } = bpass
   const { formatedDate } = useFormatedDate()
   const [date] = new Date(seasonDates.end).toISOString().split('T')
-  console.log(arr)
   const rewards = rewardsFiltered(arr, currentPage)
   return (
     <>

@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import { useEffect, useMemo, useState } from 'react'
 
 export function useImageSlider (arrayImages) {
@@ -7,15 +7,15 @@ export function useImageSlider (arrayImages) {
 
   useEffect(() => {
     const slider = setInterval(() => {
-      setCounter((prevCounter) => 
-    prevCounter === imagesMemo.length - 1 ? 0 : prevCounter + 1
-  )
+      setCounter((prevCounter) =>
+        prevCounter === imagesMemo.length - 1 ? 0 : prevCounter + 1
+      )
     }, 2000)
 
     return () => {
       clearInterval(slider)
     }
-  }, [ imagesMemo])
+  }, [imagesMemo])
 
   return { counter, imagesMemo }
 }

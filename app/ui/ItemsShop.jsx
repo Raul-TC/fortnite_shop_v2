@@ -2,6 +2,7 @@ import Link from 'next/link'
 import ImageSlider from './ImageSlider'
 import BackgroundCard from './BackgroundCard'
 const ItemsShop = async ({ shop }) => {
+  // console.log(shop)
   return (
     <>
       {shop && shop.map((el, index) => (

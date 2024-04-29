@@ -7,7 +7,6 @@ export function useShowHistory (item) {
   useEffect(() => {
     if (item.shopHistory.length > 0) {
       const clone = item.shopHistory ? item.shopHistory.slice(0).reverse() : null
-
       const fechasLocales = clone.map(fecha => new Date(fecha))
 
       setReversedHistory(fechasLocales)

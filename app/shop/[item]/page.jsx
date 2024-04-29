@@ -9,16 +9,35 @@ import History from '../../ui/History'
 import { getData } from '@/app/lib/useFetchData'
 import { MdOutlineImageNotSupported } from 'react-icons/md'
 import BackgroundCard from '@/app/ui/BackgroundCard'
+import DetailsItem from '@/app/ui/DetailsItem'
+import Await from '@/app/ui/Await'
 
-const Item = async ({ params }) => {
-  const { res: { item } } = await getData(false, false, URL_ITEM(params.item))
-  const skin = item
+export const dynamicParams = false
 
-  console.log(skin)
+// export const metadata = {
+//   title: 'Fortnite - ',
+//   description: 'Fornite Shop Today',
+//   icons: { shortcut: 'https://cdn.marketing.on.epicgames.com/fortnite/webpack/../favicon.ico' },
+//   facebook: {
+//     card: '',
+//     title: 'Tienda de HOY Fortnite',
+//     description: 'Tienda Actualizada de la tienda de fortnite'
+//   }
+// }
+generateMetadata()
+export default async function Item ({ params }) {
+  const promise = await getItem(params.item)
+  // const skin = item
+
   return (
     <>
+      <Suspense fallback={<h2>Espere un momento, cargando detalles.. ⌛</h2>}>
+        <Await promise={promise}>
+          {(item) => <DetailsItem details={item} />}
+        </Await>
+      </Suspense>
       {/* <HeadPage title={`Tienda Fortnite HOY | ${item.name}`} /> */}
-      <Suspense fallback={<h1>Cargando PAGINA...</h1>}>
+      {/* <Suspense fallback={<h1>Cargando PAGINA...</h1>}>
         {skin
           ? (
             <>
@@ -55,14 +74,6 @@ const Item = async ({ params }) => {
                           <BackgroundCard displayName={skin.name} price={skin.price} />
                         </div>}
 
-                    {/* <Image
-                                                src={child.displayAssets[0].background}
-                                                alt={`image_${child.displayName}`}
-                                                width={300}
-                                                height={300}
-                                                className='w-full h-full rounded-md'
-                                                quality={70} /> */}
-
                     <p className={`${skin.rarity.id === 'Common' ? 'bg-green-500 ' : ''} ${skin.rarity.id === 'Rare' ? 'bg-blue-500' : ''} ${skin.rarity.id === 'Uncommon' ? 'bg-gray-500' : ''} ${skin.rarity.id === 'Epic' ? ' bg-purple-500' : ''} ${skin.rarity.id === 'Legendary' ? ' bg-orange-500' : ''} my-2 text-white font-bold py-1 px-4 self-start md:mr-auto lg:py-3 lg:px-8 rounded-sm md:m-auto`}>
                       {skin.rarity.name}
                     </p>
@@ -95,9 +106,58 @@ const Item = async ({ params }) => {
             )
           : <h1>Cargando...</h1>}
 
-      </Suspense>
+      </Suspense> */}
     </>
   )
 }
 
-export default Item
+export async function getItem (id) {
+  try {
+    const fetchItem = await fetch(URL_ITEM(id), {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: process.env.API_FORTNITE
+      },
+      next: { cache: 'no-store' }
+    })
+
+    if (!fetchItem.ok) {
+      console.log(fetchItem)
+      throw new Error(`Error in 1rst Fetch: ${fetchItem.status} ${fetchItem.statusText}`)
+    }
+
+    const { item } = await fetchItem.json()
+    return item
+  } catch (error) {
+    return { error }
+  }
+}
+
+export async function generateMetadata ({ params }, parent) {
+  // read route params
+  const parr = await parent
+  console.log(params)
+  console.log(parr)
+  // fetch data
+  const skin = await fetch(URL_ITEM(params.item), {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: process.env.API_FORTNITE
+    }
+  }).then((res) => res.json())
+
+  console.log(skin)
+  // optionally access and extend (rather than replace) parent metadata
+  // const previousImages = (await parent).openGraph?.images || []
+
+  return {
+    title: `Shop - ${skin.item.name}`,
+    icons: { shortcut: 'https://cdn.marketing.on.epicgames.com/fortnite/webpack/../favicon.ico' },
+    description: skin.item.name,
+    facebook: {
+      card: '',
+      title: 'Tienda de HOY Fortnite',
+      description: `Skin ${skin.item.name}`
+    }
+  }
+}

@@ -6,7 +6,6 @@ export function useGetDay () {
   const currentDate = new Date(currentShop).toLocaleDateString()
 
   const getDay = useCallback((dia) => {
-    console.log(dia)
     const currentDayNow = new Date(dia)
     const day = currentDayNow.getDay()
     const month = currentDayNow.getMonth()
