@@ -133,31 +133,36 @@ export async function getItem (id) {
   }
 }
 
-export async function generateMetadata ({ params }, parent) {
-  // read route params
-  const parr = await parent
-  console.log(params)
-  console.log(parr)
-  // fetch data
-  const skin = await fetch(URL_ITEM(params.item), {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: process.env.API_FORTNITE
-    }
-  }).then((res) => res.json())
+// export async function generateMetadata (params, parent) {
+//   // read route params
+//   const parr = await parent
+//   console.log(params)
+//   console.log(parr)
+//   // fetch data
 
-  console.log(skin)
-  // optionally access and extend (rather than replace) parent metadata
-  // const previousImages = (await parent).openGraph?.images || []
+//   try {
+//     const skin = await fetch(URL_ITEM(await params.item), {
+//       headers: {
+//         'Content-Type': 'application/json',
+//         Authorization: process.env.API_FORTNITE
+//       }
+//     }).then((res) => res.json())
 
-  return {
-    title: `Shop - ${skin.item.name}`,
-    icons: { shortcut: 'https://cdn.marketing.on.epicgames.com/fortnite/webpack/../favicon.ico' },
-    description: skin.item.name,
-    facebook: {
-      card: '',
-      title: 'Tienda de HOY Fortnite',
-      description: `Skin ${skin.item.name}`
-    }
-  }
-}
+//     console.log(skin)
+//     // optionally access and extend (rather than replace) parent metadata
+//     // const previousImages = (await parent).openGraph?.images || []
+
+//     return {
+//       title: `Shop - ${skin.item.name}`,
+//       icons: { shortcut: 'https://cdn.marketing.on.epicgames.com/fortnite/webpack/../favicon.ico' },
+//       description: skin.item.name,
+//       facebook: {
+//         card: '',
+//         title: 'Tienda de HOY Fortnite',
+//         description: `Skin ${skin.item.name}`
+//       }
+//     }
+//   } catch (error) {
+//     return { error }
+//   }
+// }
