@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react'
 
 import Search from '../ui/Search'
-import { getData } from '../lib/useFetchData'
 import { URL_STATS, URL_STATS_SEASON } from '@/KEY'
 import PlayerStats from '../ui/PlayerStats'
 import Await from '../ui/Await'
