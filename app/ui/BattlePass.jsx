@@ -5,6 +5,7 @@ import CountDown from './CountDown'
 import { rewardsFiltered } from '../lib/utils'
 import BackgroundCard from './BackgroundCard'
 const BattlePass = ({ bpass, currentPage }) => {
+  console.log(bpass.arr)
   const { arr, info, seasonDates, videos } = bpass
   const { formatedDate } = useFormatedDate()
   const [date] = new Date(seasonDates.end).toISOString().split('T')

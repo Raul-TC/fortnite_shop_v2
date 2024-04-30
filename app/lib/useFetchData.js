@@ -1,7 +1,7 @@
 const KEY_LOGIN = process.env.API_FORTNITE
 const KEY_2 = process.env.API_FORTNITEV2
 export async function getData (isBattlePass = false, formatedShop = false, url) {
-  // console.log(url)
+  console.log(url)
   try {
     const fetchShop = await fetch(url, {
       headers: {
@@ -96,7 +96,7 @@ export async function getData (isBattlePass = false, formatedShop = false, url) 
       res = arr
     }
 
-    // console.log(res)
+    console.log(res)
     return { status: fetchShop.ok, res }
   } catch (error) {
     // console.log(error)
