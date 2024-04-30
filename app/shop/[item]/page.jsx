@@ -17,7 +17,7 @@ export const dynamicParams = false
 // }
 // generateMetadata()
 export default async function Item ({ params }) {
-  const promise = await getItem(params.item)
+  const promise = params.item ? await getItem(params.item) : null
   // const skin = item
 
   return (
@@ -103,6 +103,7 @@ export default async function Item ({ params }) {
 }
 
 export async function getItem (id) {
+  if (id === null) return
   try {
     const fetchItem = await fetch(URL_ITEM(id), {
       headers: {

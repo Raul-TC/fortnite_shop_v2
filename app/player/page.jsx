@@ -4,10 +4,8 @@ import Search from '../ui/Search'
 import { URL_STATS, URL_STATS_SEASON } from '@/KEY'
 import PlayerStats from '../ui/PlayerStats'
 import Await from '../ui/Await'
-
 const Player = async ({ searchParams }) => {
   const { name, accountType } = searchParams
-  console.log(searchParams)
 
   // const userData = await getData(false, false, URL_STATS(name, accountType), KEY_LOGIN, true)
   // const promise = await getData(false, false, URL_STATS(name, accountType), true, name, accountType)
@@ -17,7 +15,7 @@ const Player = async ({ searchParams }) => {
   console.log(promise.stack)
   return (
     <>
-      <h1 className='text-center text-xl font-bold'>Buscar mis estadísticas 🎯</h1>
+      <h1 className='text-center text-xl font-bold mb-4 mt-[95px] md:text-4xl'>Buscar mis estadísticas 🎯</h1>
       <div className='flex justify-center items-center flex-wrap m-auto gap-2 text-center'>
         <Search placeholder={name} />
       </div>
@@ -33,7 +31,7 @@ const Player = async ({ searchParams }) => {
               </Suspense>
               )}
         </>}
-      {(name === 'PadmeBv' || name === ' Padme_Bv') && <p>Esta cuenta es un bot xd</p>}
+      {/* {(name === 'PadmeBv' || name === ' Padme_Bv') && <p>Esta cuenta es un bot xd</p>} */}
     </>
   )
 }

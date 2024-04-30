@@ -1,5 +1,5 @@
 // eslint-disable-next-line camelcase
-import { Montserrat, Luckiest_Guy } from 'next/font/google'
+import { Montserrat, Luckiest_Guy, Balsamiq_Sans } from 'next/font/google'
 
 export const montserrat = Montserrat({
   weight: ['400', '800'],
@@ -9,4 +9,8 @@ export const montserrat = Montserrat({
 export const luckiestGuy = Luckiest_Guy({
   subsets: ['latin'],
   weight: ['400']
+})
+export const balsamiqSans = Balsamiq_Sans({
+  subsets: ['latin'],
+  weight: ['400', '700']
 })
