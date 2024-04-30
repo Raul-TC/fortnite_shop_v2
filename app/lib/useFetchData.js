@@ -1,7 +1,7 @@
 const KEY_LOGIN = process.env.API_FORTNITE
 const KEY_2 = process.env.API_FORTNITEV2
-export async function getData (isBattlePass = false, formatedShop = false, url, status = false, nombre = '', accountType = '') {
-  console.log(url)
+export async function getData (isBattlePass = false, formatedShop = false, url) {
+  // console.log(url)
   try {
     const fetchShop = await fetch(url, {
       headers: {
@@ -41,44 +41,44 @@ export async function getData (isBattlePass = false, formatedShop = false, url, 
       res = arr
     }
 
-    if (status) {
-      console.log(res.data.account.id)
+    // if (status) {
+    //   console.log(res.data.account.id)
 
-      const getStats = await fetch(`https://fortniteapi.io/v1/stats?account=${res.data.account.id}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: KEY_LOGIN
-        },
-        next: { cache: 'no-store' }
-      })
+    //   const getStats = await fetch(`https://fortniteapi.io/v1/stats?account=${res.data.account.id}`, {
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       Authorization: KEY_LOGIN
+    //     },
+    //     next: { cache: 'no-store' }
+    //   })
 
-      if (!fetchShop.ok) {
-        throw new Error(`Error: ${fetchShop.status} ${fetchShop.statusText}`)
-      }
-      const stats = await getStats.json()
+    //   if (!fetchShop.ok) {
+    //     throw new Error(`Error: ${fetchShop.status} ${fetchShop.statusText}`)
+    //   }
+    //   const stats = await getStats.json()
 
-      const getStatsS = await fetch(`https://fortnite-api.com/v2/stats/br/v2/?name=${nombre}&accountType=${accountType}&image=all&timeWindow=season`, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: KEY_2
-        },
-        next: { cache: 'no-store' }
-      })
+    //   const getStatsS = await fetch(`https://fortnite-api.com/v2/stats/br/v2/?name=${nombre}&accountType=${accountType}&image=all&timeWindow=season`, {
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       Authorization: KEY_2
+    //     },
+    //     next: { cache: 'no-store' }
+    //   })
 
-      if (!fetchShop.ok) {
-        throw new Error(`Error: ${fetchShop.status} ${fetchShop.statusText}`)
-      }
-      const statsSeason = await getStatsS.json()
+    //   if (!fetchShop.ok) {
+    //     throw new Error(`Error: ${fetchShop.status} ${fetchShop.statusText}`)
+    //   }
+    //   const statsSeason = await getStatsS.json()
 
-      console.log(statsSeason)
-      const { name, accountLevelHistory, globalStats } = stats
-      console.log(stats)
-      console.log(shop)
-      res = { ...shop, data: { accountLevelHistory, ...shop.data, stats: { lifetime: { ...shop.data.stats.all, trio: stats.global_stats.trio }, season: statsSeason.data.stats.all } } }
-      console.log(res)
+    //   console.log(statsSeason)
+    //   const { accountLevelHistory } = stats
+    //   console.log(stats)
+    //   console.log(shop)
+    //   res = { ...shop, data: { accountLevelHistory, ...shop.data, stats: { lifetime: { ...shop.data.stats.all, trio: stats.global_stats.trio }, season: statsSeason.data.stats.all } } }
+    //   console.log(res)
 
-      return res
-    }
+    //   return res
+    // }
     if (isBattlePass) {
       const pagesBattlePass = {}
       const pages = [...new Set(res.rewards.map((item) => item.page))]
@@ -96,7 +96,7 @@ export async function getData (isBattlePass = false, formatedShop = false, url, 
       res = arr
     }
 
-    console.log(res)
+    // console.log(res)
     return { status: fetchShop.ok, res }
   } catch (error) {
     // console.log(error)

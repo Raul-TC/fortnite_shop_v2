@@ -15,7 +15,7 @@ const useSearch = () => {
     if (searchParams.get('name') && (searchParams.get('accountType'))) {
       setStats({ user: searchParams.get('name'), type: searchParams.get('accountType') })
     }
-  }, [])
+  }, [searchParams])
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(e.target.value)

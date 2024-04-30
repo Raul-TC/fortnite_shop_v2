@@ -22,4 +22,4 @@ export const generatePagination = (currentPage, totalPages) => {
   ]
 }
 
-export const rewardsFiltered = (arr, page) => arr.filter(el => el.page == page)
+export const rewardsFiltered = (arr, page) => arr.filter(el => el.page === page)

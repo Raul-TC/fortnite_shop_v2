@@ -1,8 +1,7 @@
-import React, { memo } from 'react'
+import React from 'react'
 import { useFormatedDate } from '../lib/useFormatedDate'
 import CurrentDay from './CurrentDay'
 import CountDown from './CountDown'
-import Image from 'next/image'
 import { rewardsFiltered } from '../lib/utils'
 import BackgroundCard from './BackgroundCard'
 const BattlePass = ({ bpass, currentPage }) => {
