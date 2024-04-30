@@ -1,9 +1,7 @@
-const Await = async({promise,children}) => {
-    
-    let data = await promise
+const Await = async ({ promise, children }) => {
+  const data = await promise
 
-
-    return children(data)
+  return children(data)
 }
 
 export default Await

@@ -1,16 +1,14 @@
-export const generatePagination = (currentPage,totalPages) => {
-
+export const generatePagination = (currentPage, totalPages) => {
   if (totalPages <= 7) {
-    return Array.from({ length: totalPages }, (_, i) => i + 1);
+    return Array.from({ length: totalPages }, (_, i) => i + 1)
   }
 
   if (currentPage <= 3) {
-    return [1, 2, 3, '...', totalPages - 1, totalPages];
+    return [1, 2, 3, '...', totalPages - 1, totalPages]
   }
 
-
   if (currentPage >= totalPages - 2) {
-    return [1, 2, '...', totalPages - 2, totalPages - 1, totalPages];
+    return [1, 2, '...', totalPages - 2, totalPages - 1, totalPages]
   }
 
   return [
@@ -20,10 +18,8 @@ export const generatePagination = (currentPage,totalPages) => {
     currentPage,
     currentPage + 1,
     '...',
-    totalPages,
-  ];
-};
+    totalPages
+  ]
+}
 
-
-export const rewardsFiltered = (arr, page) =>  arr.filter(el => el.page == page)
-
+export const rewardsFiltered = (arr, page) => arr.filter(el => el.page == page)

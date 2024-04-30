@@ -13,7 +13,7 @@ import { useFormatedDate } from '../lib/useFormatedDate'
 const DetailsItem = ({ details }) => {
   console.log(details)
   console.log(details.images.icon)
-  const { formatedDate, getDays } = useFormatedDate()
+  const { formatedDate } = useFormatedDate()
 
   return (
     <>
@@ -33,31 +33,37 @@ const DetailsItem = ({ details }) => {
           <div className='flex flex-col items-center justify-center w-full'>
 
             {details.displayAssets.length > 1
-              ? <div className='relative w-full h-full shadow-lg overflow-hidden rounded-md'>
-                <div className='relative w-full h-full overflow-hidden'>
+              ? (
+                <div className='relative w-full h-full shadow-lg overflow-hidden rounded-md'>
+                  <div className='relative w-full h-full overflow-hidden'>
 
-                  <ImageSlider displayName={details.name} arrayImages={details.displayAssets} key={`${details.mainId}`} price={details.price} isItem />
+                    <ImageSlider displayName={details.name} arrayImages={details.displayAssets} key={`${details.mainId}`} price={details.price} isItem />
+                  </div>
                 </div>
-                </div>
+                )
               : details.displayAssets.length > 0 || details.images.full_background
-                ? <div className='relative w-full h-full '>
-                  <img
-                    src={details.displayAssets.length > 0 ? details.displayAssets[0].background : details.images.background}
-                    width={350}
-                    height={350}
+                ? (
+                  <div className='relative w-full h-full '>
+                    <img
+                      src={details.displayAssets.length > 0 ? details.displayAssets[0].background : details.images.background}
+                      width={350}
+                      height={350}
                             // quality={85}
-                    alt={details.id}
+                      alt={details.id}
                             // priority
-                    className='w-full h-full rounded-md'
-                  />
-                  {/* <BackgroundCard displayName={details.name} price={details.price} /> */}
+                      className='w-full h-full rounded-md'
+                    />
+                    {/* <BackgroundCard displayName={details.name} price={details.price} /> */}
 
                   </div>
-                : <div className='relative w-full h-full '>
+                  )
+                : (
+                  <div className='relative w-full h-full '>
 
-                  <MdOutlineImageNotSupported className='w-full h-full rounded-md' />
-                  {/* <BackgroundCard displayName={details.name} price={details.price} /> */}
-                  </div>}
+                    <MdOutlineImageNotSupported className='w-full h-full rounded-md' />
+                    {/* <BackgroundCard displayName={details.name} price={details.price} /> */}
+                  </div>
+                  )}
 
             {/* <p className={`${details.rarity.id === 'Common' ? 'bg-green-500 ' : ''} ${details.rarity.id === 'Rare' ? 'bg-blue-500' : ''} ${details.rarity.id === 'Uncommon' ? 'bg-gray-500' : ''} ${details.rarity.id === 'Epic' ? ' bg-purple-500' : ''} ${details.rarity.id === 'Legendary' ? ' bg-orange-500' : ''} my-2 text-white font-bold py-1 px-4 self-start md:mr-auto lg:py-3 lg:px-8 rounded-sm md:m-auto`}>
               {details.rarity.name}
@@ -68,11 +74,12 @@ const DetailsItem = ({ details }) => {
             {/* <div> */}
             {details.type && <p className=' font-bold md:text-2xl text-left self-start'>Tipo: {details.type.id}</p>}
             {details.rarity && <p className=' font-bold md:text-2xl text-left self-start'>Rareza: {details.rarity.name}</p>}
-            {details.price && <div className='flex flex-row self-start items-center justify-center gap-1'>
-              <p className=' font-bold md:text-2xl text-left'>Precio: {details.price}
-              </p>
-              <Image src={vBuck} alt='vBuck_coin' width={50} height={50} className='w-9 h-9' />
-            </div>}
+            {details.price && (
+              <div className='flex flex-row self-start items-center justify-center gap-1'>
+                <p className=' font-bold md:text-2xl text-left'>Precio: {details.price}
+                </p>
+                <Image src={vBuck} alt='vBuck_coin' width={50} height={50} className='w-9 h-9' />
+              </div>)}
             {details.rarity && <p className=' font-bold md:text-2xl text-left self-start'>Rareza: {details.rarity.name}</p>}
             {details.releaseDate && <p className=' font-bold md:text-2xl text-left self-start'>Primera Aparición: {formatedDate(new Date(details.releaseDate)).replaceAll('-', '.')}</p>}
             {details.introduction && <p className=' font-bold md:text-2xl text-left self-start'>Aparición: {details.introduction.chapter} {details.introduction.season} </p>}

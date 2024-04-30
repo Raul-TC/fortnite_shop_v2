@@ -16,11 +16,13 @@ const DateComponent = ({ fullDate, dayss }) => {
       ? <><h1 className={` ${baseClass}  block w-full`}>Cargando Datos...</h1></>
       : dayss < 1
         ? <span className='block m-auto text-center md:text-2xl font-bold text-yellowForrnite'>¡En la Tienda Ahora!</span>
-        : <div className='w-full flex flex-col h-auto'>
-          <span className={`${baseClass} self-start`}>{`${day} ${months} ${year}`}</span>
-          <span className='text-base text-white text-end w-full block'> {dayOrDays}</span>
+        : (
+          <div className='w-full flex flex-col h-auto'>
+            <span className={`${baseClass} self-start`}>{`${day} ${months} ${year}`}</span>
+            <span className='text-base text-white text-end w-full block'> {dayOrDays}</span>
 
           </div>
+          )
       }
     </div>
   )
