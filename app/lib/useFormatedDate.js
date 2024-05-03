@@ -6,6 +6,7 @@ export function useFormatedDate () {
     (date) => {
       if (!date) return 'Cargando..'
       const formatedDate = typeof date === 'string' ? date.replaceAll('-', ',') : date
+
       const today = new Date(formatedDate)
       const day = today.getDate().toString()
       const month = (today.getMonth() + 1).toString()
