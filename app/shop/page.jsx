@@ -16,7 +16,7 @@ export const metadata = {
     description: 'Tienda Actualizada de la tienda de fortnite'
   }
 }
-export const dynamicParams = false
+export const dynamic = 'force-dynamic'
 
 export default async function Home () {
   const promise = await getShop()
@@ -44,7 +44,7 @@ export async function getShop () {
         'Content-Type': 'application/json',
         Authorization: process.env.API_FORTNITE
       },
-      next: { cache: 'no-store' }
+      next: { revalidate: 10 }
     })
     if (!fetchShop.ok) {
       throw new Error(`Error: ${fetchShop.status} ${fetchShop.statusText}`)

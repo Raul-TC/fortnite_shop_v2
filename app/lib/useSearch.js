@@ -26,7 +26,7 @@ const useSearch = () => {
     // } else {
     //   params.delete('query')
     // }
-    if (stats.user === '' && stats.type === '') {
+    if (stats.user === '' || stats.type === '') {
       setStats({ ...stats, isEmpty: true })
     } else {
       params.set('name', stats.user)

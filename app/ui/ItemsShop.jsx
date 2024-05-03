@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import ImageSlider from './ImageSlider'
 import BackgroundCard from './BackgroundCard'
+import Image from 'next/image'
 const ItemsShop = async ({ shop }) => {
   // console.log(shop)
   return (
@@ -30,15 +31,16 @@ const ItemsShop = async ({ shop }) => {
                     : (
                       <div className='relative w-full h-full '>
 
-                        {/* <Image
-                                                src={child.displayAssets[0].background}
-                                                alt={`image_${child.displayName}`}
-                                                width={300}
-                                                height={300}
-                                                className='w-full h-full rounded-md'
-                                                quality={70} /> */}
+                        <Image
+                          src={child.displayAssets[0].background}
+                          alt={`image_${child.displayName}`}
+                          width={300}
+                          height={300}
+                          className='w-full h-full rounded-md'
+                          quality={70}
+                        />
 
-                        <img src={child.displayAssets[0].background} alt={`image_${child.displayName}`} className='w-full h-full rounded-md' />
+                        {/* <img src={child.displayAssets[0].background} alt={`image_${child.displayName}`} className='w-full h-full rounded-md' /> */}
                         <BackgroundCard displayName={child.displayName} price={child.price.regularPrice} />
                       </div>
                       )}

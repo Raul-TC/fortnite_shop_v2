@@ -16,7 +16,7 @@ const CountDown = ({ date, isShop }) => {
   )
   return (
     <>
-      <div className={`${luckiestGuy.className} ${!isShop ? 'flex-wrap' : ''} flex flex-col items-center justify-between text-yellowForrnite w-full ${!isShop ? 'mb-4' : ''}`}>
+      <div className={`${luckiestGuy.className} ${!isShop ? 'flex-wrap' : ''} flex flex-col items-center justify-between text-yellowForrnite w-full ${!isShop ? 'my-4' : ''}`}>
 
         <span className='block text-left text-base'> {isShop ? 'Siguiente Tienda' : 'Quedan:'}</span>
         {hours === '0' && minutes === '0' && seconds === '0'
@@ -27,9 +27,9 @@ const CountDown = ({ date, isShop }) => {
             )
           : (
             <div className='flex justify-center items-center gap-4 w-full m-auto flex-wrap'>
-              {!isShop && <TimeComponent time={days} label='Dias' />}
-              <TimeComponent time={hours} label='Horas' />
-              <TimeComponent time={minutes} label='Minutos' />
+              {!isShop && <TimeComponent time={days} label={days === 1 ? 'Día' : 'Días'} />}
+              <TimeComponent time={hours} label={hours === 1 ? 'Hora' : 'Horas'} />
+              <TimeComponent time={minutes} label={minutes === 1 ? 'Minuto' : 'Minutos'} />
               <TimeComponent time={seconds} label='Segundos' />
             </div>
             )}

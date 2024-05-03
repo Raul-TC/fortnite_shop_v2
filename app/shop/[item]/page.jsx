@@ -3,7 +3,7 @@ import { URL_ITEM } from '@/KEY'
 import DetailsItem from '@/app/ui/DetailsItem'
 import Await from '@/app/ui/Await'
 
-export const dynamicParams = false
+export const dynamic = 'force-dynamic'
 
 // export const metadata = {
 //   title: 'Fortnite - ',
@@ -19,7 +19,7 @@ export const dynamicParams = false
 export default async function Item ({ params }) {
   const promise = params.item ? await getItem(params.item) : null
   // const skin = item
-
+  console.log(params)
   return (
     <>
       <Suspense fallback={<h2>Espere un momento, cargando detalles.. ⌛</h2>}>

@@ -5,14 +5,13 @@ import CountDown from './CountDown'
 import { rewardsFiltered } from '../lib/utils'
 import BackgroundCard from './BackgroundCard'
 const BattlePass = ({ bpass, currentPage }) => {
-  console.log(bpass.arr)
   const { arr, info, seasonDates, videos } = bpass
   const { formatedDate } = useFormatedDate()
   const [date] = new Date(seasonDates.end).toISOString().split('T')
   const rewards = rewardsFiltered(arr, currentPage)
   return (
     <>
-      <h1 className='text-center font-bold text-2xl'>{info.chapterSeason}</h1>
+      <h1 className='text-center font-bold text-2xl md:text-4xl'>{info.chapterSeason}</h1>
       <div className='flex flex-col self-start items-center justify-center w-full rounded-md top-0 left-0 right-0'>
 
         <CurrentDay date={formatedDate(date)} isShop={false} />

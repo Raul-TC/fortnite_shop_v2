@@ -22,7 +22,9 @@ const Search = ({ placeholder }) => {
           <img className={`${stats.type === logo.name ? 'shadow-lg bg-yellow-600' : ''} rounded-full`} src={logo.src} key={logo.name} alt={`${logo.name}_icon`} onClick={() => setStats({ ...stats, type: logo.name })} />
         ))}
       </div>
-      {stats.isEmpty && <div>No Seleccionado nada Noob 😒, has de ser Bronce</div>}
+      {(stats.isEmpty && stats.user === '' && stats.isEmpty === '') && <div>No Seleccionado nada Noob 😒, has de ser Bronce</div>}
+      {(stats.user === '' && stats.isEmpty) && <div className='text-red-400'>Debes escribir tu usuario</div>}
+      {(stats.type === '' && stats.isEmpty) && <div className='text-red-400'>Debes seleccionar tu plataforma</div>}
     </form>
   )
 }
