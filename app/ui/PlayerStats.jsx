@@ -1,10 +1,7 @@
 import React from 'react'
-import { useFormatedDate } from '../lib/useFormatedDate'
 import StatCard from './StatCard'
 import { luckiestGuy } from '../ui/fonts'
 const PlayerStats = ({ stats }) => {
-  const { formatedDate } = useFormatedDate()
-
   const handleMinutes = (time) => {
     const minutos = time % 60
     const horas = Math.floor(time / 60) % 24
