@@ -14,7 +14,9 @@ const DetailsItem = ({ details }) => {
   console.log(details)
   console.log(details.images.icon)
   const { formatedDate } = useFormatedDate()
-
+  function capitalize (str) {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
+  }
   return (
     <>
 
@@ -72,21 +74,21 @@ const DetailsItem = ({ details }) => {
           </div>
           <div className='w-full flex justify-around flex-col items-center gap-4 md:self-start md:pl-32 pt-4'>
             {/* <div> */}
-            {details.type && <p className=' font-bold md:text-2xl text-left self-start'>Tipo: {details.type.id}</p>}
-            {details.rarity && <p className=' font-bold md:text-2xl text-left self-start'>Rareza: {details.rarity.name}</p>}
-            {details.price && (
+            {details.type && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Tipo: <span className='text-white'>{capitalize(details.type.name)}</span></p>}
+            {details.rarity && <p className=' font-bold md:text-2xl text-left self-start text-gray-500 capitalize'>Rareza: <span className='text-white'>{capitalize(details.rarity.name)}</span></p>}
+            {details.price !== 0 && (
               <div className='flex flex-row self-start items-center justify-center gap-1'>
-                <p className=' font-bold md:text-2xl text-left'>Precio: {details.price}
+                <p className=' font-bold md:text-2xl text-left text-gray-500'>Precio: <span className='text-white'>{details.price}</span>
                 </p>
                 <Image src={vBuck} alt='vBuck_coin' width={50} height={50} className='w-9 h-9' />
               </div>)}
-            {details.rarity && <p className=' font-bold md:text-2xl text-left self-start'>Rareza: {details.rarity.name}</p>}
-            {details.releaseDate && <p className=' font-bold md:text-2xl text-left self-start'>Primera Aparición: {formatedDate(new Date(details.releaseDate)).replaceAll('-', '.')}</p>}
-            {details.introduction && <p className=' font-bold md:text-2xl text-left self-start'>Aparición: {details.introduction.chapter} {details.introduction.season} </p>}
+            {/* {details.rarity && <p className=' font-bold md:text-2xl text-left self-start'>Rareza: {details.rarity.name}</p>} */}
+            {details.releaseDate && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Primera Aparición: <span className='text-white'>{formatedDate(new Date(details.releaseDate)).replaceAll('-', '.')}</span></p>}
+            {details.introduction && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Aparición: <span className='text-white'>{details.introduction.chapter} {details.introduction.season}</span> </p>}
 
             {/* {details.set && <p className=' text-center font-bold  md:text-3xl'> <span>{details.set.partOf}</span></p>} */}
             {/* {details.introduction && <p className=' text-center font-bold  md:text-3xl'> {details.introduction.text}</p>} */}
-            {details.series && <p className=' font-bold text-center md:text-2xl'>Serie:<span className='self-start font-normal capitalize'> {(details.series.name).substring(6)}</span></p>}
+            {details.series && <p className=' font-bold text-center md:text-2xl text-gray-500'>Serie:<span className='self-start font-normal capitalize'> <span className='text-white'>{(details.series.name).substring(6)}</span></span></p>}
             {/* </div> */}
             <div className='flex flex-col h-full w-full justify-center items-start'>
               <History item={details} />
@@ -100,8 +102,9 @@ const DetailsItem = ({ details }) => {
             <div className='grid grid-cols-2 mt-2 mb-8 gap-4 md:grid-cols-4'>
 
               {details?.grants.map((el, index) => {
+                console.log(el)
                 return (
-                  <div key={index} className='relative w-full h-full '>
+                  <Link href={`/shop/${el.id}`} key={index} className='relative w-full h-full '>
                     <img
                       src={el.images.icon_background}
                       width={350}
@@ -111,11 +114,11 @@ const DetailsItem = ({ details }) => {
                             // priority
                       className='w-full h-full rounded-md'
                     />
-                    <BackgroundCard displayName={details.name} price={details.price} />
+                    <BackgroundCard displayName={el.name} price={el.price} />
 
-                  </div>
+                  </Link>
                 )
-                // <img key={index} src={el.images.icon_background} alt='' className='rounded-md' />
+              // <img key={index} src={el.images.icon_background} alt='' className='rounded-md' />
               })}
             </div>
           </>}
