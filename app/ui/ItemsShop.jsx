@@ -1,13 +1,15 @@
 import Link from 'next/link'
 import ImageSlider from './ImageSlider'
 import BackgroundCard from './BackgroundCard'
+import { luckiestGuy } from '../ui/fonts'
+
 const ItemsShop = async ({ shop }) => {
   // console.log(shop)
   return (
     <>
       {shop && shop.map((el, index) => (
         <section key={`${index}_${el.section}`} id={`${el.section}`} className='pb-4 w-full h-full'>
-          <h2 className='text-2xl text-center font-bold mt-4 mb-4 md:text-3xl'>{el.section}</h2>
+          <h2 className={`${luckiestGuy.className}text-2xl text-center font-bold mt-4 mb-4 md:text-3xl `}>{el.section}</h2>
           <div className='text-center grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3 grid-flow-dense h-full w-full'>
             {el.data.map((child, index) => {
               return (child.displayAssets.length > 0 && (
