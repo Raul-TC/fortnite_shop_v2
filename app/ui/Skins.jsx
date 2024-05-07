@@ -27,11 +27,13 @@ const Skins = ({ allCosmetics, rarities }) => {
     }
 
     if (filters.rarity !== 'Todas') {
+      // eslint-disable-next-line eqeqeq
       filteredData = filteredData.filter(el => el.rarity?.name.toUpperCase() == filters.rarity.toUpperCase())
       console.log(filteredData)
     }
 
     if (filters.series !== 'Todas') {
+      // eslint-disable-next-line eqeqeq
       filteredData = filteredData.filter(el => el.series?.name.toUpperCase() == filters.series.toUpperCase())
       console.log(filteredData)
     }
