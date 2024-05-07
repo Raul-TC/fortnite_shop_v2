@@ -8,7 +8,7 @@ const History = ({ item }) => {
 
   return (
     <div className='w-full'>
-      {item.shopHistory && item.shopHistory.length >= 1 && <h1 className='text-center font-bold text-2xl md:text-3xl'>Apariciones en Tienda ({item.shopHistory.length})</h1>}
+      {item.shopHistory && item.shopHistory.length >= 1 && <h1 className='text-center font-bold text-2xl md:text-3xl mb-4'>Apariciones en Tienda ({item.shopHistory.length})</h1>}
       {
                 !item.shopHistory
                   ? null

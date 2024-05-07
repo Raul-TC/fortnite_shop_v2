@@ -24,7 +24,7 @@ const DetailsItem = ({ details }) => {
       <div className={`${details.rarity.id === 'Common' ? 'border-green-500' : ''} ${details.rarity.id === 'Rare' ? 'border-blue-500 ' : ''} ${details.rarity.id === 'Uncommon' ? 'border-gray-500 ' : ''} ${details.rarity.id === 'Epic' ? ' border-purple-500 ' : ''} ${details.rarity.id === 'Legendary' ? ' border-orange-500' : ''} border-b-2 pb-4 relative top-0 left-0 right-0 w-full shadow-md text-4xl font-bold text-center flex flex-col `}>
         <div className='w-28 h-28 rounded-full m-auto overflow-hidden'>
           {/* <img src={details.images.icon} alt='' srcset='' /> */}
-          <img src={details.images.icon ? details.images.icon : details.grants[0].url} alt='' />
+          <img src={details.images?.icon ? details.images?.icon : details.grants[0]?.url} alt='' />
 
         </div>
         <span className={`${luckiestGuy.className}`}>   {details.name}</span>
@@ -88,7 +88,7 @@ const DetailsItem = ({ details }) => {
 
             {/* {details.set && <p className=' text-center font-bold  md:text-3xl'> <span>{details.set.partOf}</span></p>} */}
             {/* {details.introduction && <p className=' text-center font-bold  md:text-3xl'> {details.introduction.text}</p>} */}
-            {details.series && <p className=' font-bold text-center md:text-2xl text-gray-500'>Serie:<span className='self-start font-normal capitalize'> <span className='text-white'>{(details.series.name).substring(6)}</span></span></p>}
+            {details.series && <p className=' font-bold text-center md:text-2xl text-gray-500 self-start'>Serie:<span className='self-start font-normal capitalize'> <span className='text-white'>{(details.series.name).substring(6)}</span></span></p>}
             {/* </div> */}
             <div className='flex flex-col h-full w-full justify-center items-start'>
               <History item={details} />
@@ -104,8 +104,8 @@ const DetailsItem = ({ details }) => {
               {details?.grants.map((el, index) => {
                 console.log(el)
                 return (
-                  <Link href={`/shop/${el.id}`} key={index} className='relative w-full h-full '>
-                    <img
+                  <Link href={`/shop/${el.id}`} key={index} className='relative w-full h-full'>
+                    {el.images.icon_background ? <> <img
                       src={el.images.icon_background}
                       width={350}
                       height={350}
@@ -113,9 +113,14 @@ const DetailsItem = ({ details }) => {
                       alt={details.id}
                             // priority
                       className='w-full h-full rounded-md'
-                    />
-                    <BackgroundCard displayName={el.name} price={el.price} />
+                                                    />
+                      <BackgroundCard displayName={el.name} price={el.price} />
+                                                 </>
+                      : <div className='relative w-full h-full '>
 
+                        <MdOutlineImageNotSupported className='w-full h-full rounded-md' />
+                        {/* <BackgroundCard displayName={details.name} price={details.price} /> */}
+                      </div>}
                   </Link>
                 )
               // <img key={index} src={el.images.icon_background} alt='' className='rounded-md' />

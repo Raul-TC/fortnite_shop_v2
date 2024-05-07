@@ -3,12 +3,11 @@ import React from 'react'
 import { useGetDay } from '../lib/useGetDay'
 
 const DateComponent = ({ fullDate, dayss }) => {
-  const dayOrDays = dayss > 0 ? `hace ${dayss} días` : 'Hoy'
+  const dayOrDays = dayss === 1 ? 'hace 1 día' : dayss > 0 ? `hace ${dayss} días` : 'Hoy'
   const baseClass = 'w-full text-left text-lg md:text-xl text-gray-500'
   const { getDay } = useGetDay(fullDate)
   const { day, months, year } = getDay(fullDate)
 
-  console.log(fullDate, dayss)
   return (
     <div className='flex w-full flex-row'>
       {
