@@ -18,7 +18,7 @@ const PlayerStats = ({ stats }) => {
   }
   return (
     <div className='mt-4'>
-      {/* <h2 className={`${luckiestGuy.className} text-center text-3xl`}>{stats.account.name} {stats.account.name === 'Padme_Bv' && <span className='text-base text-red-400 block'>(Es un Bot xd)</span>}{stats.account.name === 'Shadow.9999' && <span className='text-base text-red-400 block'>( Se cae de los puentes xd )</span>} </h2> */}
+      <h2 className={`${luckiestGuy.className} text-center text-3xl`}>{stats.account.name} </h2>
       <h2 className={`${luckiestGuy.className} text-center text-2xl`}>Temporada Actual: Nivel {stats.battlePass.level}</h2>
       <div className='my-4'>
         <div className='flex w-full flex-col md:flex-row items-start justify-start flex-wrap self-start gap-4'>
