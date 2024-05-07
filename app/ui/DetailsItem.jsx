@@ -105,22 +105,28 @@ const DetailsItem = ({ details }) => {
                 console.log(el)
                 return (
                   <Link href={`/shop/${el.id}`} key={index} className='relative w-full h-full'>
-                    {el.images.icon_background ? <> <img
-                      src={el.images.icon_background}
-                      width={350}
-                      height={350}
+                    {el.images.icon_background
+                      ? (
+                        <>
+                          <img
+                            src={el.images.icon_background}
+                            width={350}
+                            height={350}
                             // quality={85}
-                      alt={details.id}
+                            alt={details.id}
                             // priority
-                      className='w-full h-full rounded-md'
-                                                    />
-                      <BackgroundCard displayName={el.name} price={el.price} />
-                                                 </>
-                      : <div className='relative w-full h-full '>
+                            className='w-full h-full rounded-md'
+                          />
+                          <BackgroundCard displayName={el.name} price={el.price} />
+                        </>
+                        )
+                      : (
+                        <div className='relative w-full h-full '>
 
-                        <MdOutlineImageNotSupported className='w-full h-full rounded-md' />
-                        {/* <BackgroundCard displayName={details.name} price={details.price} /> */}
-                      </div>}
+                          <MdOutlineImageNotSupported className='w-full h-full rounded-md' />
+                          {/* <BackgroundCard displayName={details.name} price={details.price} /> */}
+                        </div>
+                        )}
                   </Link>
                 )
               // <img key={index} src={el.images.icon_background} alt='' className='rounded-md' />
