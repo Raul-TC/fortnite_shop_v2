@@ -8,7 +8,7 @@ import Menu from './Menu'
 const Skins = ({ allCosmetics, rarities }) => {
   const [data, setData] = useState(allCosmetics.slice(0, 50))
   const [displayCount, setDisplayCount] = useState(50)
-  const [filters, setFilters] = useState({ rareza: 'Todas', series: 'Todas', tipos: 'Todas' })
+  const [filters, setFilters] = useState({ rareza: 'Todas', series: 'Todas', tipos: 'Todas', search: '' })
   // const [types, setTypes] = useState({ rarity: 'Todas', series: 'Todas' })
   const [expandedItem, setExpandedItem] = useState(null)
 
@@ -22,7 +22,7 @@ const Skins = ({ allCosmetics, rarities }) => {
   useEffect(() => {
     let filteredData = allCosmetics
 
-    if (filters.rareza === 'Todas' && filters.series === 'Todas' && filters.tipos !== 'Todas') {
+    if (filters.rareza === 'Todas' && filters.series === 'Todas' && filters.tipos !== 'Todas' && filters.search !== '') {
       filteredData = allCosmetics
     }
 
@@ -47,6 +47,15 @@ const Skins = ({ allCosmetics, rarities }) => {
       })
       // console.log(filteredData)
     }
+    if (filters.search !== '') {
+      // eslint-disable-next-line eqeqeq
+      filteredData = filteredData.filter(el => {
+        // console.log(el.type?.name)
+        // eslint-disable-next-line eqeqeq
+        return el.name.includes(filters.search)
+      })
+      // console.log(filteredData)
+    }
     setData(filteredData.slice(0, displayCount))
   }, [allCosmetics, filters, displayCount])
 
@@ -68,12 +77,17 @@ const Skins = ({ allCosmetics, rarities }) => {
           })
         })}
       </div>
+      <input
+        name='' id='' placeholder='Jinx Arcane' className='bg-yellowForrnite text-bg-body py-2 px-4 mt-2 rounded-md outline-none' onChange={(e) => {
+          setFilters(prevFilrers => ({ ...prevFilrers, search: e.target.value }))
+        }}
+      />
       <InfiniteScroll
         dataLength={data.length} hasMore={data.length < allCosmetics.length} next={loadMoreData}
       >
         <div className='text-center grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3 grid-flow-dense h-full w-full mt-8'>
           {data.map((child, index) => {
-            // console.log(child.bg)
+            // console.log(child)
             return (
 
               <Link

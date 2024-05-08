@@ -44,24 +44,23 @@ export async function getCosmetics () {
 
     const { rarities, series } = await getRarities.json()
 
-    const addBg = items.map(el => {
-      let bgImage = ''
-      let bgDefault = ''
-      // console.log(el.rarity.name)
-      series.forEach(element => {
-        // console.log(element)
+    const formatedDate = items.map(el => {
+      return { id: el.id, type: el.type, name: el.name, rarity: el.rarity, series: el.series, images: el.images, price: el.price }
+    })
+    const seriesMap = Object.fromEntries(series.map(el => [el.name.toUpperCase(), el.image]))
+    const raritiesMap = Object.fromEntries(rarities.map(el => [el.name.toUpperCase(), el.image]))
 
-        if (element.name.toUpperCase() === el.series?.name.toUpperCase()) bgImage = element.image
-      })
-      rarities.forEach(element => {
-        // console.log(element)
+    const addBg = formatedDate.map(el => {
+      const bgImage = seriesMap[el.series?.name.toUpperCase()] || ''
+      const bgDefault = raritiesMap[el.rarity?.name.toUpperCase()] || ''
 
-        if (element.name.toUpperCase() === el.rarity?.name.toUpperCase()) bgDefault = element.image
-      })
+      if (el.type.name === 'itemaccess') {
+        return { ...el, type: { id: 'Pase de Batalla', name: 'Pase de Batalla' }, bg: bgImage, bgDefault }
+      }
       return { ...el, bg: bgImage, bgDefault }
     })
 
-    // console.log(addBg)
+    console.log(addBg)
     const filter = rarities.filter(el => el.name !== 'Exótico' && el.name !== 'MÍTICA' && el.name !== '')
     const unique = {}
     const tipos = addBg.filter(type => {
@@ -71,14 +70,22 @@ export async function getCosmetics () {
         return true
       }
       return false
-    }).map(type => ({ name: type.type.name, id: type.type.name }))
-    // console.log(types)
+    }).map(type => {
+      if (type.type.name === 'Accesorio mochilero') {
+        return ({ name: 'Mochila', id: 'Mochila' })
+      } else {
+        return ({ name: type.type.name, id: type.type.name })
+      }
+    })
+    console.log(tipos)
+    const arrayFiltrado = tipos.filter(el => ['Traje', 'Pico', 'Gesto', 'Ala delta', 'Mochila', 'Mascota', 'Envoltorio', 'Grafiti', 'Música', 'Pista de improvisación', 'Pantalla de carga', 'Lote de Objetos', 'Kit de LEGO®', 'Decoración'].includes(el.name))
+
     filter.unshift({ name: 'Todas', id: 'Todas' })
     series.unshift({ name: 'Todas', id: 'Todas' })
-    tipos.unshift({ name: 'Todas', id: 'Todas' })
+    arrayFiltrado.unshift({ name: 'Todas', id: 'Todas' })
     return {
       allitems: addBg,
-      rarities: [{ rareza: filter }, { series }, { tipos }]
+      rarities: [{ rareza: filter }, { series }, { tipos: arrayFiltrado }]
 
     }
   } catch (error) {
