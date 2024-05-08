@@ -4,6 +4,7 @@ function capitalize (str) {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
 }
 const Menu = ({ handleClick, nameType, index, value, handleFilters, expandedItem, setFilters, filters, setExpandedItem }) => {
+  console.log(filters[nameType])
   return (
     <ul className='bg-yellowForrnite cursor-pointer relative rounded-md' onClick={() => handleClick(index)}>
       <div className='flex items-center justify-between '>
@@ -17,7 +18,7 @@ const Menu = ({ handleClick, nameType, index, value, handleFilters, expandedItem
       <div className={`flex flex-col w-full bg-[#1c1c1c] scroll-m-1 absolute z-30 py-2 ${expandedItem === index ? 'opacity-100 block transition-opacity ease-out' : 'opacity-0 hidden'} `}>
 
         {value.map((el, index) => {
-          console.log(el.colors?.Color1)
+          // console.log(el.colors?.Color1)
           return (
             <i
               key={index} onClick={() => {

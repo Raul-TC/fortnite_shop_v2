@@ -9,7 +9,7 @@ const Cosmetics = async ({ searchParams }) => {
   const { allitems, rarities } = await getCosmetics(searchParams.page)
   // console.log(allCosmetics, 'coss')
 
-  console.log(rarities.length)
+  // console.log(rarities.length)
 
   return (
     <Skins allCosmetics={allitems} rarities={rarities} />
@@ -43,12 +43,43 @@ export async function getCosmetics () {
     }
 
     const { rarities, series } = await getRarities.json()
+
+    const addBg = items.map(el => {
+      let bgImage = ''
+      let bgDefault = ''
+      // console.log(el.rarity.name)
+      series.forEach(element => {
+        // console.log(element)
+
+        if (element.name.toUpperCase() === el.series?.name.toUpperCase()) bgImage = element.image
+      })
+      rarities.forEach(element => {
+        // console.log(element)
+
+        if (element.name.toUpperCase() === el.rarity?.name.toUpperCase()) bgDefault = element.image
+      })
+      return { ...el, bg: bgImage, bgDefault }
+    })
+
+    // console.log(addBg)
     const filter = rarities.filter(el => el.name !== 'Exótico' && el.name !== 'MÍTICA' && el.name !== '')
+    const unique = {}
+    const tipos = addBg.filter(type => {
+      const key = `${type.type.name}`
+      if (!unique[key]) {
+        unique[key] = true
+        return true
+      }
+      return false
+    }).map(type => ({ name: type.type.name, id: type.type.name }))
+    // console.log(types)
     filter.unshift({ name: 'Todas', id: 'Todas' })
     series.unshift({ name: 'Todas', id: 'Todas' })
+    tipos.unshift({ name: 'Todas', id: 'Todas' })
     return {
-      allitems: items,
-      rarities: [{ rarity: filter }, { series }]
+      allitems: addBg,
+      rarities: [{ rareza: filter }, { series }, { tipos }]
+
     }
   } catch (error) {
     console.log(error)
