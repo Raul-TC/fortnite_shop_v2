@@ -42,6 +42,7 @@ const Skins = ({ allCosmetics, rarities }) => {
       // eslint-disable-next-line eqeqeq
       filteredData = filteredData.filter(el => {
         // console.log(el.type?.name)
+        // eslint-disable-next-line eqeqeq
         return el.type?.name.toUpperCase() == filters.tipos.toUpperCase()
       })
       // console.log(filteredData)
