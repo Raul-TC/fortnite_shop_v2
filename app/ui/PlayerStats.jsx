@@ -16,6 +16,7 @@ const PlayerStats = ({ stats }) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }
     return date.toLocaleString('es-MX', options)
   }
+
   return (
     <div className='mt-4'>
       <h2 className={`${luckiestGuy.className} text-center text-3xl`}>{stats.account.name} </h2>

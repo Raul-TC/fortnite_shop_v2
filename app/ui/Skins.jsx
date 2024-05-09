@@ -19,6 +19,27 @@ const Skins = ({ allCosmetics, rarities }) => {
   const handleFilters = (type, data) => {
 
   }
+
+  // const color = (type) => {
+  //   if (type === 'COMÚN') {
+  //     return '#B1B1B1'
+  //   }
+  //   if (type === 'ÉPICO') {
+  //     return '#D505FF'
+  //   }
+  //   if (type === 'LEGENDARIA') {
+  //     return '#F68B20'
+  //   }
+  //   if (type === 'MÍTICA') {
+  //     return '#FFDE61'
+  //   }
+  //   if (type === 'RARA') {
+  //     return '#00FFF6'
+  //   }
+  //   if (type === 'POCO COMÚN') {
+  //     return '#5BFD00'
+  //   }
+  // }
   useEffect(() => {
     let filteredData = allCosmetics
 
@@ -66,8 +87,13 @@ const Skins = ({ allCosmetics, rarities }) => {
   // console.log(rarities)
   return (
     <>
-      <div className='flex gap-4 flex-wrap'>
+      <div className='flex gap-4 flex-wrap  justify-between items-center'>
 
+        <input
+          name='' id='' placeholder='Jinx Arcane' className='bg-yellowForrnite text-bg-body py-2 px-4 rounded-md outline-none w-[50%]' onChange={(e) => {
+            setFilters(prevFilrers => ({ ...prevFilrers, search: e.target.value }))
+          }}
+        />
         {rarities.map((item, index) => {
           return Object.entries(item).map(([key, value]) => {
             // console.log(key)
@@ -77,29 +103,24 @@ const Skins = ({ allCosmetics, rarities }) => {
           })
         })}
       </div>
-      <input
-        name='' id='' placeholder='Jinx Arcane' className='bg-yellowForrnite text-bg-body py-2 px-4 mt-2 rounded-md outline-none' onChange={(e) => {
-          setFilters(prevFilrers => ({ ...prevFilrers, search: e.target.value }))
-        }}
-      />
       <InfiniteScroll
         dataLength={data.length} hasMore={data.length < allCosmetics.length} next={loadMoreData}
       >
         <div className='text-center grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3 grid-flow-dense h-full w-full mt-8'>
           {data.map((child, index) => {
-            // console.log(child)
+            console.log(child.rarity.name)
             return (
 
               <Link
                 key={`${index}_${child.id}`}
                 href={`/shop/${child.id}`}
-                className=' rounded-lg shadow-md self-start cursor-pointer'
+                className=' rounded-lg self-start cursor-pointer '
               >
 
-                <div className='relative w-full h-full '>
+                <div className='relative w-full h-full overflow-hidden rounded-md'>
                   <img src={child.images.icon} alt={`image_${child.name}`} className='w-full h-full rounded-md absolute ' />
                   <img src={child.bg === '' ? child.bgDefault : child.bg} alt='' className='w-full h-full ' />
-                  <BackgroundCard displayName={child.name} price={child.price.regularPrice} />
+                  <BackgroundCard displayName={child.name} price={child.price.regularPrice} colorSkin={child.rarity.name} />
                 </div>
 
               </Link>

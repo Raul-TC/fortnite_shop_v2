@@ -5,10 +5,10 @@ import { URL_STATS, URL_STATS_SEASON } from '@/KEY'
 import PlayerStats from '../ui/PlayerStats'
 import Await from '../ui/Await'
 export const dynamic = 'force-dynamic'
-const Player = async ({ searchParams }) => {
+const Player = async ({ url, searchParams }) => {
   const { name, accountType } = searchParams
 
-  const promise = (name !== '' || accountType !== '') && await getStats(name, accountType)
+  const promise = await getStats(name, accountType)
 
   return (
     <>
