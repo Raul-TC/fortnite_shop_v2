@@ -1,9 +1,9 @@
+import SkeletonItem from '@/app/ui/SkeletonItem'
 import React from 'react'
 
 const loading = () => {
   return (
-    <div>loading</div>
-  )
+    <SkeletonItem />)
 }
 
 export default loading

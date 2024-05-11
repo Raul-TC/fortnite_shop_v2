@@ -3,7 +3,6 @@ import React from 'react'
 import vBuck from '../assets/vBuckPNG.png'
 
 const BackgroundCard = React.memo(({ displayName, price, colorSkin = false }) => {
-  console.log(colorSkin)
   const color = (colorSkin) => {
     if (colorSkin === 'COMÚN') {
       return '#B1B1B1'

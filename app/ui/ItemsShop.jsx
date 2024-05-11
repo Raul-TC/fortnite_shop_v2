@@ -17,13 +17,13 @@ const ItemsShop = async ({ shop }) => {
                 <Link
                   key={`${index}_${child.mainId}`}
                   href={`/shop/${child.mainId}`}
-                  className={`${child.displayName.includes('Lote') || child.displayName.includes('LOTE') || child.displayName.includes('PAQUETE') || child.displayName.includes('Pack') || el.section.includes('Lotes') ? 'col-span-2 row-span-2 order-[-1] ' : 'text-xs'} rounded-lg shadow-md self-start cursor-pointer h-full w-full`}
+                  className={`${child.displayName.includes('Lote') || child.displayName.includes('LOTE') || child.displayName.includes('PAQUETE') || child.displayName.includes('Pack') || el.section.includes('Lotes') ? 'col-span-2 row-span-2 order-[-1] ' : 'text-xs'} rounded-md overflow-hidden self-start cursor-pointer h-full w-full block`}
                 >
 
                   {child.displayAssets.length > 1
                     ? (
                       <div className='relative w-full h-full shadow-lg overflow-hidden rounded-md'>
-                        <div className='relative w-full h-full overflow-hidden'>
+                        <div className='relative w-full h-full overflow-hidden rounded-md'>
 
                           <ImageSlider displayName={child.displayName} arrayImages={child.displayAssets} key={`${index}_${child.mainId}`} price={child.price.regularPrice} />
                         </div>
@@ -31,7 +31,7 @@ const ItemsShop = async ({ shop }) => {
                       )
 
                     : (
-                      <div className='relative w-full h-full '>
+                      <div className='relative w-full h-full rounded-md'>
 
                         {/* <Image
                                                 src={child.displayAssets[0].background}

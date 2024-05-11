@@ -11,8 +11,6 @@ import { luckiestGuy } from '../ui/fonts'
 import { useFormatedDate } from '../lib/useFormatedDate'
 
 const DetailsItem = ({ details }) => {
-  console.log(details)
-  console.log(details.images.icon)
   const { formatedDate } = useFormatedDate()
   function capitalize (str) {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()

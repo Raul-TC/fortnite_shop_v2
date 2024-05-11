@@ -2,6 +2,7 @@ import React, { Suspense } from 'react'
 import { URL_ITEM } from '@/KEY'
 import DetailsItem from '@/app/ui/DetailsItem'
 import Await from '@/app/ui/Await'
+import SkeletonItem from '@/app/ui/SkeletonItem'
 
 export const dynamic = 'force-dynamic'
 
@@ -18,11 +19,9 @@ export const dynamic = 'force-dynamic'
 // generateMetadata()
 export default async function Item ({ params }) {
   const promise = params.item ? await getItem(params.item) : null
-  // const skin = item
-  console.log(params)
   return (
     <>
-      <Suspense fallback={<h2>Espere un momento, cargando detalles.. ⌛</h2>}>
+      <Suspense fallback={<SkeletonItem />}>
         <Await promise={promise}>
           {(item) => <DetailsItem details={item} />}
         </Await>

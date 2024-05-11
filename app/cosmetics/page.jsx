@@ -61,7 +61,6 @@ export async function getCosmetics () {
       return { ...el, bg: bgImage, bgDefault }
     })
 
-    console.log(addBg)
     const filter = rarities.filter(el => el.name !== 'Exótico' && el.name !== 'MÍTICA' && el.name !== '')
     const unique = {}
     const tipos = addBg.filter(type => {
@@ -78,7 +77,6 @@ export async function getCosmetics () {
         return ({ name: type.type.name, id: type.type.name })
       }
     })
-    console.log(tipos)
     const arrayFiltrado = tipos.filter(el => ['Traje', 'Pico', 'Gesto', 'Ala delta', 'Mochila', 'Mascota', 'Envoltorio', 'Grafiti', 'Música', 'Pista de improvisación', 'Pantalla de carga', 'Lote de Objetos', 'Kit de LEGO®', 'Decoración'].includes(el.name))
 
     filter.unshift({ name: 'Todas', id: 'Todas' })
