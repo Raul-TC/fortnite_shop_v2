@@ -15,7 +15,6 @@ const StatCard = ({ wins, kills, top10, top25, deaths, kda, matches, winrate, ti
       {modo === 'Trio' && <p className={commonClass}>Top 6: <span className='text-white'>{top25}</span></p>}
       {modo === 'Squad' && <p className={commonClass}>Top 3: <span className='text-white'>{top10}</span></p>}
       {modo === 'Squad' && <p className={commonClass}>Top 6: <span className='text-white'>{top25}</span></p>}
-      {/* <p className='pl-3'>Top 25: {top25}</p> */}
       {modo !== 'Trio' && <p className={commonClass}>Muertes: <span className='text-white'>{deaths}</span></p>}
       <p className={commonClass}>K / D: <span className='text-white'>{kda}</span></p>
       <p className={commonClass}>Partidas: <span className='text-white'>{matches}</span></p>

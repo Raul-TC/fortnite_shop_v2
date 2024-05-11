@@ -9,7 +9,7 @@ const Cosmetics = async ({ searchParams }) => {
   const promise = await getCosmetics(searchParams.page)
 
   return (
-    <Suspense key={`${Math.random()}`} fallback={<SkeletonCosmetics />}>
+    <Suspense fallback={<SkeletonCosmetics />}>
       <Await promise={promise}>
         {({ allitems, rarities }) => <Skins allCosmetics={allitems} rarities={rarities} />}
       </Await>

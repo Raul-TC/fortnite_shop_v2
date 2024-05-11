@@ -22,11 +22,10 @@ const Search = ({ placeholder }) => {
           <img className={`${stats.type === logo.name ? 'shadow-lg bg-yellow-600' : ''} rounded-full cursor-pointer`} src={logo.src} key={logo.name} alt={`${logo.name}_icon`} onClick={() => setStats({ ...stats, type: logo.name })} />
         ))}
       </div>
-      {(stats.isEmpty && stats.user === '' && stats.isEmpty === '') && <div>No Seleccionado nada Noob 😒, has de ser Bronce</div>}
-      {(stats.user === '' && stats.isEmpty) && <div className='text-red-400'>Debes escribir tu usuario</div>}
-      {(stats.type === '' && stats.isEmpty) && <div className='text-red-400'>Debes seleccionar tu plataforma</div>}
-      {(stats.type.trim().length === 0) && <div className='text-red-400'>Has ingresado espacios en blanco</div>}
-      {/* {loader && <div>Buscando Cuenta... ⏳</div>} */}
+      {(stats.isEmpty && stats.user.trim() === '' && stats.isEmpty === '') && <div>No Seleccionado nada Noob 😒, has de ser Bronce</div>}
+      {(stats.user.trim() === '' && stats.isEmpty) && <div className='text-red-400'>Debes escribir tu usuario</div>}
+      {(stats.type.trim() === '' && stats.isEmpty) && <div className='text-red-400'>Debes seleccionar tu plataforma</div>}
+      {(stats.type.trim().length === 0 && stats.isEmpty) && <div className='text-red-400'>Has ingresado espacios en blanco</div>}
     </form>
   )
 }

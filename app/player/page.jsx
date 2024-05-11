@@ -12,9 +12,7 @@ const Player = async ({ searchParams }) => {
       <div className='flex justify-center items-center flex-wrap m-auto gap-2 text-center'>
         <Search placeholder={name} />
       </div>
-      {(name === '' || accountType === '') && <h1 className='text-center text-2xl mt-5'>Usuario "{name}" no encontrado 😔, verifica el nombre y la plataforma elegida</h1>}
-
-      {(name !== undefined || accountType !== undefined) && (
+      {(name !== undefined && accountType !== undefined && name.trim() !== '') && (
         <Suspense key={`${name}+${Math.random()}`} fallback={<SkeletonStats />}>
           <PlayerStats name={name} accountType={accountType} />
         </Suspense>

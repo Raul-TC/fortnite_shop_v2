@@ -17,7 +17,7 @@ const useSearch = () => {
   }, [searchParams])
   const handleSubmit = (e) => {
     e.preventDefault()
-    // setLoader(true)
+    console.log(stats.user)
     // Construye la cadena de consulta con URLSearchParams
     const params = new URLSearchParams()
     // if (stats.user && stats.type) {
@@ -26,7 +26,7 @@ const useSearch = () => {
     // } else {
     //   params.delete('query')
     // }
-    if (stats.user === '' || stats.type === '') {
+    if (stats.user.trim() === '' || stats.type.trim() === '') {
       setStats({ ...stats, isEmpty: true })
     } else {
       // setLoader(false)
