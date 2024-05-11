@@ -3,8 +3,11 @@ import StatCard from './StatCard'
 import { luckiestGuy } from '../ui/fonts'
 import { getStats } from '../lib/data'
 const PlayerStats = async ({ name, accountType }) => {
-  const { stats, account, battlePass } = await getStats(name, accountType)
+  const { stats, account, battlePass, stack } = await getStats(name, accountType)
 
+  if (stack) {
+    return <h1>No pudimos encontrar al usuario '{name}' 🥲🥲, verifica el nombre o la plataforma elegida</h1>
+  }
   const handleMinutes = (time) => {
     const minutos = time % 60
     const horas = Math.floor(time / 60) % 24

@@ -25,6 +25,7 @@ const Search = ({ placeholder }) => {
       {(stats.isEmpty && stats.user === '' && stats.isEmpty === '') && <div>No Seleccionado nada Noob 😒, has de ser Bronce</div>}
       {(stats.user === '' && stats.isEmpty) && <div className='text-red-400'>Debes escribir tu usuario</div>}
       {(stats.type === '' && stats.isEmpty) && <div className='text-red-400'>Debes seleccionar tu plataforma</div>}
+      {(stats.type.trim().length === 0) && <div className='text-red-400'>Has ingresado espacios en blanco</div>}
       {/* {loader && <div>Buscando Cuenta... ⏳</div>} */}
     </form>
   )
