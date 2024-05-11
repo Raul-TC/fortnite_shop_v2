@@ -20,26 +20,6 @@ const Skins = ({ allCosmetics, rarities }) => {
 
   }
 
-  // const color = (type) => {
-  //   if (type === 'COMÚN') {
-  //     return '#B1B1B1'
-  //   }
-  //   if (type === 'ÉPICO') {
-  //     return '#D505FF'
-  //   }
-  //   if (type === 'LEGENDARIA') {
-  //     return '#F68B20'
-  //   }
-  //   if (type === 'MÍTICA') {
-  //     return '#FFDE61'
-  //   }
-  //   if (type === 'RARA') {
-  //     return '#00FFF6'
-  //   }
-  //   if (type === 'POCO COMÚN') {
-  //     return '#5BFD00'
-  //   }
-  // }
   useEffect(() => {
     let filteredData = allCosmetics
 
@@ -50,19 +30,16 @@ const Skins = ({ allCosmetics, rarities }) => {
     if (filters.rareza !== 'Todas') {
       // eslint-disable-next-line eqeqeq
       filteredData = filteredData.filter(el => el.rarity?.name.toUpperCase() == filters.rareza.toUpperCase())
-      console.log(filteredData)
     }
 
     if (filters.series !== 'Todas') {
       // eslint-disable-next-line eqeqeq
       filteredData = filteredData.filter(el => el.series?.name.toUpperCase() == filters.series.toUpperCase())
-      console.log(filteredData)
     }
 
     if (filters.tipos !== 'Todas') {
       // eslint-disable-next-line eqeqeq
       filteredData = filteredData.filter(el => {
-        // console.log(el.type?.name)
         // eslint-disable-next-line eqeqeq
         return el.type?.name.toUpperCase() == filters.tipos.toUpperCase()
       })
@@ -71,7 +48,6 @@ const Skins = ({ allCosmetics, rarities }) => {
     if (filters.search !== '') {
       // eslint-disable-next-line eqeqeq
       filteredData = filteredData.filter(el => {
-        // console.log(el.type?.name)
         // eslint-disable-next-line eqeqeq
         return el.name.includes(filters.search)
       })
@@ -96,7 +72,6 @@ const Skins = ({ allCosmetics, rarities }) => {
         />
         {rarities.map((item, index) => {
           return Object.entries(item).map(([key, value]) => {
-            // console.log(key)
             return (
               <Menu key={`${index}_${key}`} nameType={key} handleClick={handleClick} index={index} value={value} handleFilters={handleFilters} expandedItem={expandedItem} setFilters={setFilters} filters={filters} setExpandedItem={setExpandedItem} />
             )
@@ -108,9 +83,8 @@ const Skins = ({ allCosmetics, rarities }) => {
       >
         <div className='text-center grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3 grid-flow-dense h-full w-full mt-8'>
           {data.map((child, index) => {
-            console.log(child.rarity.name)
+            console.log(child)
             return (
-
               <Link
                 key={`${index}_${child.id}`}
                 href={`/shop/${child.id}`}
