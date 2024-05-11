@@ -5,6 +5,7 @@ import { luckiestGuy } from '../ui/fonts'
 
 const ItemsShop = async ({ shop }) => {
   // console.log(shop)
+
   return (
     <>
       {shop && shop.map((el, index) => (

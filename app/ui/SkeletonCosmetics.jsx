@@ -10,7 +10,7 @@ const MainCosmetics = () => {
 
           <div key={index} className=' min-[233px] min-h-[233px] row-span-1 col-span-1 animate-pulse pb-4 flex flex-col justify-end items-start  bg-gray-400 rounded-lg flex-wrap w-full h-full'>
             <div className='w-[60%] rounded-md mb-4 h-4 bg-gray-200 block m-auto' />
-            <div className='w-[20%] rounded-md h-4 bg-gray-200 ml-2 block self-end mr-2' />
+            {/* <div className='w-[20%] rounded-md h-4 bg-gray-200 ml-2 block self-end mr-2' /> */}
           </div>
 
         ))}

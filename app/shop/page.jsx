@@ -51,11 +51,11 @@ export async function getShop () {
     }
     const { shop } = await fetchShop.json()
 
-    console.log(shop)
+    // console.log(shop)
     const dataFiltered = {}
     const categories = [...new Set(shop.map((section) => section.section.name))]
 
-    console.log(categories)
+    // console.log(categories)
     categories.forEach(el => {
       if (el === null || el === '' || el === false) {
         dataFiltered.Destacados = []

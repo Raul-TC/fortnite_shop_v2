@@ -5,23 +5,23 @@ import { useEffect, useState } from 'react'
 const useSearch = () => {
   const { replace } = useRouter()
   const [stats, setStats] = useState({ user: '', type: '', isEmpty: false })
+  // const [loader, setLoader] = useState(false)
   // const router = useRouter()
   const searchParams = useSearchParams()
 
   const pathname = usePathname()
   useEffect(() => {
-    console.log(searchParams.get('name'))
-    console.log(searchParams.get('accountType'))
     if (searchParams.get('name') && (searchParams.get('accountType'))) {
       setStats({ user: searchParams.get('name'), type: searchParams.get('accountType') })
     }
   }, [searchParams])
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(e.target.value)
+    // setLoader(true)
     // Construye la cadena de consulta con URLSearchParams
     const params = new URLSearchParams()
     // if (stats.user && stats.type) {
+
     //   params.set('query', term)
     // } else {
     //   params.delete('query')
@@ -29,6 +29,7 @@ const useSearch = () => {
     if (stats.user === '' || stats.type === '') {
       setStats({ ...stats, isEmpty: true })
     } else {
+      // setLoader(false)
       params.set('name', stats.user)
       params.set('accountType', stats.type)
       console.log(params.toString())

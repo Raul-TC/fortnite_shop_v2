@@ -1,19 +1,15 @@
 import { URL_COSMETICS, URL_RARITIES } from '@/KEY'
 import React, { Suspense } from 'react'
-// import ImageSlider from '../ui/ImageSlider'
 import Skins from '../ui/Skins'
 import Await from '../ui/Await'
-// import InfiniteScroll from 'react-infinite-scroll-component'
+import SkeletonCosmetics from '../ui/SkeletonCosmetics'
 export const dynamic = 'force-dynamic'
 
 const Cosmetics = async ({ searchParams }) => {
   const promise = await getCosmetics(searchParams.page)
-  // console.log(allCosmetics, 'coss')
-
-  // console.log(rarities.length)
 
   return (
-    <Suspense fallback={<h1>Obteniendo Datos</h1>}>
+    <Suspense key={`${Math.random()}`} fallback={<SkeletonCosmetics />}>
       <Await promise={promise}>
         {({ allitems, rarities }) => <Skins allCosmetics={allitems} rarities={rarities} />}
       </Await>
