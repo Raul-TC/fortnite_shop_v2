@@ -1,4 +1,4 @@
-import { URL_STATS, URL_STATS_SEASON } from '@/KEY'
+import { URL_RARITIES, URL_STATS, URL_STATS_SEASON } from '@/KEY'
 
 export async function getStats (name, accountType) {
   try {
@@ -50,5 +50,25 @@ export async function getStats (name, accountType) {
   } catch (error) {
     console.error('Error fetching stats:', error)
     return error
+  }
+}
+
+export async function getRarities () {
+  try {
+    const getRarities = await fetch(URL_RARITIES, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: process.env.API_FORTNITE
+      }
+    })
+    if (!getRarities.ok) {
+      throw new Error(`Error al obtener las rarezas: ${getRarities.status} ${getRarities.statusText}`)
+    }
+
+    const { rarities, series } = await getRarities.json()
+
+    return { rarities, series }
+  } catch (error) {
+
   }
 }

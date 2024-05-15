@@ -5,6 +5,7 @@ import CountDown from '../ui/CountDown'
 import SkeletonCards from '../ui/SkeletonCards'
 import Await from '../ui/Await'
 import { URL_SHOP } from '@/KEY'
+import { getRarities } from '../lib/data'
 
 export const metadata = {
   title: 'Tienda Fortnite HOY',
@@ -63,8 +64,19 @@ export async function getShop () {
         dataFiltered[el] = []
       }
     })
+    const { rarities, series } = await getRarities()
 
-    shop.forEach(item => {
+    const seriesMap = Object.fromEntries(series.map(el => [el.name.toUpperCase(), el.image]))
+    const raritiesMap = Object.fromEntries(rarities.map(el => [el.name.toUpperCase(), el.image]))
+
+    const addBg = shop.map(el => {
+      const bgImage = seriesMap[el.series?.name.toUpperCase()] || ''
+      const bgDefault = raritiesMap[el.rarity?.name.toUpperCase()] || ''
+
+      return { ...el, bg: bgImage, bgDefault }
+    })
+
+    addBg.forEach(item => {
       if (!dataFiltered[item.section.name]) {
         dataFiltered.Destacados.push({ ...item })
       } else {
@@ -73,6 +85,7 @@ export async function getShop () {
         !datt.includes(true) && dataFiltered[item.section.name].push({ ...item })
       }
     })
+
     return Object.entries(dataFiltered).map(([key, value]) => ({ section: key, data: value }))
   } catch (error) {
     console.log(error)

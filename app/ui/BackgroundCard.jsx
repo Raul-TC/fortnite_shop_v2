@@ -25,7 +25,7 @@ const BackgroundCard = React.memo(({ displayName, price, colorSkin = false }) =>
   }
   return (
     <div
-      className='bg-black bg-opacity-40 w-full h-14 absolute z-20 bottom-0 left-0 flex clamp-md-xl items-center justify-center ' style={{ boxShadow: `0px 6px 3px inset  ${colorSkin && color(colorSkin.toUpperCase())}` }}
+      className='bg-black bg-opacity-40 w-full h-14 absolute z-10 bottom-0 left-0 flex clamp-md-xl items-center justify-center ' style={{ boxShadow: `0px 6px 3px inset  ${colorSkin && color(colorSkin.toUpperCase())}` }}
     >
       <span className=' left-0 text-white font-bold px-4 opacity-100 self-center text-xs lg:text-base capitalize'>{displayName}</span>
       <div className='flex items-center pr-1 self-end absolute right-0 gap-1 mb-1'>

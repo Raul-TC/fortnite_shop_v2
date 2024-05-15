@@ -3,6 +3,7 @@ import { URL_ITEM } from '@/KEY'
 import DetailsItem from '@/app/ui/DetailsItem'
 import Await from '@/app/ui/Await'
 import SkeletonItem from '@/app/ui/SkeletonItem'
+import { getRarities } from '@/app/lib/data'
 
 export const dynamic = 'force-dynamic'
 
@@ -118,7 +119,21 @@ export async function getItem (id) {
     }
 
     const { item } = await fetchItem.json()
-    return item
+
+    const { series } = await getRarities()
+
+    const seriesMap = Object.fromEntries(series.map(el => [el.name.toUpperCase(), el.image]))
+    // const raritiesMap = Object.fromEntries(rarities.map(el => [el.name.toUpperCase(), el.image]))
+
+    const addBg = () => {
+      const bgImage = seriesMap[item.series?.name.toUpperCase()] || ''
+      // const bgDefault = raritiesMap[item.rarity?.name.toUpperCase()] || ''
+
+      return { ...item, bg: bgImage }
+    }
+
+    const res = addBg()
+    return res
   } catch (error) {
     return { error }
   }
