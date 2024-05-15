@@ -121,14 +121,14 @@ const DetailsItem = async ({ details }) => {
 
                           {details.bg !== ''
                             ? (
-                              <div key={`${index}$_${el.displayName}`} className='relative w-full h-full'>
+                              <div className='relative w-full h-full'>
 
                                 <img src={details.bg} alt='' className='absolute top-0 bottom-0 left-0 right-0 -z-0 h-full w-full' />
                                 <img src={el.images.icon} alt={`${el.materialInstance}_${index}`} className='relative z-10' />
 
                               </div>
                               )
-                            : <img key={`_${index}${displayName}`} src={el.background} alt={`${el.materialInstance}_${index}`} className={`${counter === index ? 'w-full' : 'hidden'} rounded-md `} />}
+                            : <img src={el.background} alt={`${el.materialInstance}_${index}`} className='w-full h-full rounded-md' />}
                           <BackgroundCard displayName={el.name} price={el.price} />
                         </>
                         )
