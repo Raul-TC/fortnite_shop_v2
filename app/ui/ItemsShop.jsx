@@ -47,9 +47,8 @@ const ItemsShop = async ({ shop }) => {
                           ? (
                             <>
 
+                              <img src={child.displayAssets[0].url} alt={`image_${child.displayName}`} className='w-full h-full rounded-md relative top-0 bottom-0 left-0 right-0 z-10' />
                               <img src={child.bg} alt='' className='absolute top-0 bottom-0 left-0 right-0 z-0' />
-
-                              <img src={child.displayAssets[0].url} alt={`image_${child.displayName}`} className='w-full h-full rounded-md relative top-0 bottom-0 left-0 right-0' />
 
                             </>
                             )

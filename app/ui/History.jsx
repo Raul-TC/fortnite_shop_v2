@@ -38,7 +38,7 @@ const History = ({ item }) => {
                       )
                     : (
                       <>
-                        <h2 className='font bold text-center md:text-2xl'>Nuevo en Fortnite</h2>
+                        {getDays(reversedHistory[0]) < 1 && <h2 className='font bold text-center md:text-2xl'>Nuevo en Fortnite</h2>}
                         <DateComponent fullDate={formatedDate(reversedHistory[0])} dayss={getDays(reversedHistory[0])} length={item.shopHistory.length} />
                       </>
                       )

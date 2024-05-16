@@ -43,7 +43,7 @@ const DetailsItem = async ({ details }) => {
                 )
               : details.displayAssets.length > 0 || details.images.full_background
                 ? (
-                  <div className='relative w-full h-full '>
+                  <div className='relative w-full h-full rounded-md overflow-hidden'>
                     {/* <img
                       src={details.displayAssets.length > 0 ? details.displayAssets[0].background : details.images.background}
                       width={350}
@@ -53,9 +53,15 @@ const DetailsItem = async ({ details }) => {
                             // priority
                       className='w-full h-full rounded-md'
                     /> */}
-                    <img src={details.images.icon} alt={`image_${details.name}`} className='w-full h-full rounded-md absolute ' />
-                    <img src={details.bg === '' ? details.bgDefault : details.bg} alt='' className='w-full h-full ' />
 
+                    {details.bg !== ''
+                      ? (
+                        <>
+                          <img src={details.displayAssets.length > 0 ? details.displayAssets[0].url : details.images.icon} alt={`image_${details.name}`} className='w-full h-full rounded-md relative  z-20' />
+                          <img src={details.bg} alt='' className='w-full h-full absolute top-0 z-0 ' />
+                        </>
+                        )
+                      : <img src={details.displayAssets.length > 0 ? details.displayAssets[0].background : details.images.background} alt={`image_${details.name}`} className='w-full h-full rounded-md relative  z-20' />}
                     {/* <BackgroundCard displayName={details.name} price={details.price} /> */}
 
                   </div>
