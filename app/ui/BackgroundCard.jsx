@@ -2,30 +2,21 @@ import Image from 'next/image'
 import React from 'react'
 import vBuck from '../assets/vBuckPNG.png'
 
+const colorMap = {
+  COMÚN: '#B1B1B1',
+  ÉPICO: '#D505FF',
+  LEGENDARIA: '#F68B20',
+  MÍTICA: '#FFDE61',
+  RARA: '#00FFF6',
+  'POCO COMÚN': '#5BFD00'
+}
+
 const BackgroundCard = React.memo(({ displayName, price, colorSkin = false }) => {
-  const color = (colorSkin) => {
-    if (colorSkin === 'COMÚN') {
-      return '#B1B1B1'
-    }
-    if (colorSkin === 'ÉPICO') {
-      return '#D505FF'
-    }
-    if (colorSkin === 'LEGENDARIA') {
-      return '#F68B20'
-    }
-    if (colorSkin === 'MÍTICA') {
-      return '#FFDE61'
-    }
-    if (colorSkin === 'RARA') {
-      return '#00FFF6'
-    }
-    if (colorSkin === 'POCO COMÚN') {
-      return '#5BFD00'
-    }
-  }
+  const color = typeof colorSkin === 'string' ? colorMap[colorSkin.toUpperCase()] : undefined
+
   return (
     <div
-      className='bg-black bg-opacity-40 w-full h-14 absolute z-10 bottom-0 left-0 flex clamp-md-xl items-center justify-center ' style={{ boxShadow: `0px 6px 3px inset  ${colorSkin && color(colorSkin.toUpperCase())}` }}
+      className='bg-black bg-opacity-40 w-full h-14 absolute z-10 bottom-0 left-0 flex clamp-md-xl items-center justify-center ' style={{ boxShadow: `0px 6px 3px inset  ${color}` }}
     >
       <span className=' left-0 text-white font-bold px-4 opacity-100 self-center text-xs lg:text-base capitalize'>{displayName}</span>
       <div className='flex items-center pr-1 self-end absolute right-0 gap-1 mb-1'>

@@ -19,7 +19,7 @@ const ImageSlider = ({ displayName, arrayImages, isItem = false, price, bg }) =>
         //   className={`transition-all duration-500 ${counter === index ? 'w-full h-full ' : 'hidden'} rounded-md `}        />
         bg !== ''
           ? (
-            <div key={`${index}$_{displayName}`} className=' overflow-hidden'>
+            <div key={`${index}$_{displayName}`} className=' overflow-hidden rounded-md'>
 
               <img src={bg} alt='' className='absolute top-0 bottom-0 left-0 right-0 -z-0 h-full w-full' />
               <img src={el.url} alt={`${el.materialInstance}_${index}`} className={`${counter === index ? '  relative z-10' : ' hidden'}`} />

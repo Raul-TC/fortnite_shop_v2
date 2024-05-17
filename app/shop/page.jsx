@@ -45,7 +45,7 @@ export async function getShop () {
         'Content-Type': 'application/json',
         Authorization: process.env.API_FORTNITE
       },
-      next: { revalidate: 10 }
+      next: { cache: 'no-store' }
     })
     if (!fetchShop.ok) {
       throw new Error(`Error: ${fetchShop.status} ${fetchShop.statusText}`)
