@@ -1,3 +1,4 @@
+'use client'
 import { useDates } from '../lib/useDates'
 import { useGetDay } from '../lib/useGetDay'
 

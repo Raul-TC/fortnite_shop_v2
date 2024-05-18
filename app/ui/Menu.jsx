@@ -3,7 +3,7 @@ import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io'
 function capitalize (str) {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
 }
-const Menu = ({ handleClick, nameType, index, value, handleFilters, expandedItem, setFilters, filters, setExpandedItem }) => {
+const Menu = ({ handleClick, nameType, index, value, expandedItem, setFilters, filters, setExpandedItem }) => {
   console.log(filters[nameType])
   return (
     <ul className='bg-yellowForrnite cursor-pointer relative rounded-md' onClick={() => handleClick(index)}>
