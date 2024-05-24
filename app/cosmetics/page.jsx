@@ -3,7 +3,7 @@ import React, { Suspense } from 'react'
 import Skins from '../ui/Skins'
 import Await from '../ui/Await'
 import SkeletonCosmetics from '../ui/SkeletonCosmetics'
-export const dynamic = 'force-dynamic'
+export const dynamic = 'auto'
 
 const Cosmetics = async ({ searchParams }) => {
   const promise = await getCosmetics(searchParams.page)

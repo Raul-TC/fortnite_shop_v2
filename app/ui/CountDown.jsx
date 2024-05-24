@@ -16,9 +16,9 @@ const CountDown = ({ date, isShop }) => {
   )
   return (
     <>
-      <div className={`${luckiestGuy.className} ${!isShop ? 'flex-wrap' : ''} flex flex-col items-center justify-between text-yellowForrnite w-full ${!isShop ? 'my-4' : ''}`}>
+      <div className={`${luckiestGuy.className} ${!isShop ? 'flex-wrap ' : ''} flex flex-col items-center justify-between text-yellowForrnite w-full ${!isShop ? 'my-4' : ''}`}>
 
-        <span className='block text-left text-base'> {isShop ? 'Siguiente Tienda' : 'Quedan:'}</span>
+        <span className={`${isShop ? 'text-4xl' : ''} block text-left text-base○`}> {isShop ? 'Siguiente Tienda' : 'Quedan:'}</span>
         {hours === '0' && minutes === '0' && seconds === '0'
           ? (
             <>

@@ -14,9 +14,7 @@ const Logo = () => {
         width={150}
         height={60}
         priority
-                //  placeholder='blur'
-                //  blurDataURL={darkTheme ? `../assets/${logoTitleWhite}` : `../assets/${logoTitle}`}
-        alt='logo_fornite'
+        alt='logo_fortnite'
       />
     </Link>
   )

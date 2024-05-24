@@ -52,7 +52,6 @@ export async function getShop () {
     }
     const { shop } = await fetchShop.json()
 
-    // console.log(shop)
     const dataFiltered = {}
     const categories = [...new Set(shop.map((section) => section.section.name))]
 
@@ -80,7 +79,9 @@ export async function getShop () {
       if (!dataFiltered[item.section.name]) {
         dataFiltered.Destacados.push({ ...item })
       } else {
-        const datt = dataFiltered[item.section.name].map(ab => ab.mainId === item.id)
+        const datt = dataFiltered[item.section.name].map(ab => {
+          return ab.displayName === item.displayName
+        })
 
         !datt.includes(true) && dataFiltered[item.section.name].push({ ...item })
       }

@@ -1,67 +1,27 @@
 'use client'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import BackgroundCard from './BackgroundCard'
 import Menu from './Menu'
+import { useCosmetics } from '../lib/useCosmetics'
+import { useExpandItem } from '../lib/useExpandItem'
 
 const Skins = ({ allCosmetics, rarities }) => {
-  const [data, setData] = useState(allCosmetics.slice(0, 50))
-  const [displayCount, setDisplayCount] = useState(50)
-  const [filters, setFilters] = useState({ rareza: 'Todas', series: 'Todas', tipos: 'Todas', search: '' })
-  const [expandedItem, setExpandedItem] = useState(null)
-
-  const loadMoreData = () => {
-    setDisplayCount(prevCount => prevCount + 50)
-  }
-
-  useEffect(() => {
-    let filteredData = allCosmetics
-
-    console.log(filters.rareza === 'Todas' && filters.series === 'Todas' && filters.tipos === 'Todas' && filters.search === '')
-    if (filters.rareza === 'Todas' && filters.series === 'Todas' && filters.tipos === 'Todas' && filters.search === '') {
-      filteredData = allCosmetics
-      console.log('entro')
-    }
-
-    if (filters.rareza !== 'Todas') {
-      // eslint-disable-next-line eqeqeq
-      filteredData = filteredData.filter(el => el.rarity?.name.toUpperCase() == filters.rareza.toUpperCase())
-    }
-
-    if (filters.series !== 'Todas') {
-      // eslint-disable-next-line eqeqeq
-      filteredData = filteredData.filter(el => el.series?.name.toUpperCase() == filters.series.toUpperCase())
-    }
-
-    if (filters.tipos !== 'Todas') {
-      // eslint-disable-next-line eqeqeq
-      filteredData = filteredData.filter(el => el.type?.name.toUpperCase() == filters.tipos.toUpperCase())
-    }
-    if (filters.search !== '') {
-      // eslint-disable-next-line eqeqeq
-      filteredData = filteredData.filter(el => el.name.includes(filters.search))
-    }
-    setData(filteredData.slice(0, displayCount))
-  }, [allCosmetics, filters, displayCount])
-
-  const handleClick = (index) => {
-    setExpandedItem(expandedItem === index ? null : index)
-  }
-
+  const { data, filters, loadMoreData, handleClick, handleFilters } = useCosmetics(allCosmetics)
+  const { expandedItem, handleExpandItem } = useExpandItem()
   return (
     <>
       <div className='flex gap-4 flex-wrap  justify-between items-center'>
 
         <input
           name='searchSkin' placeholder='Jinx Arcane' className='bg-yellowForrnite text-bg-body py-2 px-4 rounded-md outline-none w-[50%]' onChange={(e) => {
-            setFilters(prevFilrers => ({ ...prevFilrers, search: e.target.value }))
+            handleFilters(prevFilrers => ({ ...prevFilrers, search: e.target.value }))
           }}
         />
         {rarities.map((item, index) => {
           return Object.entries(item).map(([key, value]) => {
             return (
-              <Menu key={`${index}_${key}`} nameType={key} handleClick={handleClick} index={index} value={value} expandedItem={expandedItem} setFilters={setFilters} filters={filters} setExpandedItem={setExpandedItem} />
+              <Menu key={`${index}_${key}`} nameType={key} handleClick={handleClick} index={index} value={value} expandedItem={expandedItem} handleFilters={handleFilters} filters={filters} handleExpandItem={handleExpandItem} />
             )
           })
         })}
