@@ -14,6 +14,7 @@ export const metadata = {
     description: 'Tienda Actualizada de la tienda de fortnite'
   }
 }
+export const dynamic = 'force-dynamic'
 
 export default async function Home ({ searchParams }) {
   const promise = await getBattlePass()
@@ -39,8 +40,7 @@ export async function getBattlePass () {
       headers: {
         'Content-Type': 'application/json',
         Authorization: process.env.API_FORTNITE
-      },
-      next: { cache: 'force-cache' }
+      }
     })
     if (!fetchBp.ok) {
       throw new Error(`Error al obtener el pase de batalla 😔: ${fetchBp.status} ${fetchBp.statusText}`)
@@ -50,7 +50,7 @@ export async function getBattlePass () {
 
     const pagesBattlePass = {}
     const pages = [...new Set(res.rewards.map((item) => item.page))]
-
+    console.log(res)
     pages.forEach(el => { pagesBattlePass[el] = [] })
     res.rewards.forEach(el => {
       const datt = pagesBattlePass[el.page].map(ab => ab.offerId === el.offerId)

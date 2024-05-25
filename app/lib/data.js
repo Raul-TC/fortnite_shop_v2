@@ -67,6 +67,7 @@ export async function getRarities () {
 
     const { rarities, series } = await getRarities.json()
 
+    console.log({ rarities, series })
     return { rarities, series }
   } catch (error) {
 
