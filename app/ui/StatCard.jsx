@@ -1,10 +1,10 @@
 import React from 'react'
 import { luckiestGuy, balsamiqSans } from './fonts'
 
-const StatCard = ({ wins, kills, top10, top25, deaths, kda, matches, winrate, timePlayed, updated, modo }) => {
+const StatCard = ({ wins, kills, top10, top25, deaths, kda, matches, timePlayed, updated, modo }) => {
   const commonClass = 'pl-3 text-gray-500'
   return (
-    <div className={`${balsamiqSans.className} font-bold relative m-auto bg-bg-header md:max-w-[400px] text-base h-[342px] pt-[37px] rounded-md w-full`}>
+    <div className={`${balsamiqSans.className} font-bold relative m-auto bg-bg-header text-base h-[342px] pt-[37px] rounded-md w-[98%] md:w-[432px]`}>
       <p className={commonClass}>Ganadas: <span className='text-white'>{wins}</span></p>
       <p className={commonClass}>Asesinatos: <span className='text-white'>{kills}</span></p>
       {modo === 'Solo' && <p className={commonClass}>Top 10:<span className='text-white'> {top10}</span></p>}
