@@ -1,20 +1,20 @@
 import React from 'react'
 import { luckiestGuy, balsamiqSans } from './fonts'
 
-const StatCard = ({ wins, kills, top10, top25, deaths, kda, matches, timePlayed, updated, modo }) => {
+const StatCard = ({ wins, kills, topN, topNN, deaths, kda, matches, timePlayed, updated, modo }) => {
   const commonClass = 'pl-3 text-gray-500'
   return (
     <div className={`${balsamiqSans.className} font-bold relative m-auto bg-bg-header text-base h-[342px] pt-[37px] rounded-md w-[98%] md:w-[432px]`}>
       <p className={commonClass}>Ganadas: <span className='text-white'>{wins}</span></p>
       <p className={commonClass}>Asesinatos: <span className='text-white'>{kills}</span></p>
-      {modo === 'Solo' && <p className={commonClass}>Top 10:<span className='text-white'> {top10}</span></p>}
-      {modo === 'Solo' && <p className={commonClass}>Top 25: <span className='text-white'>{top25}</span></p>}
-      {modo === 'Duo' && <p className={commonClass}>Top 5: <span className='text-white'>{top10}</span></p>}
-      {modo === 'Duo' && <p className={commonClass}>Top 12: <span className='text-white'>{top25}</span></p>}
-      {modo === 'Trio' && <p className={commonClass}>Top 3: <span className='text-white'>{top10}</span></p>}
-      {modo === 'Trio' && <p className={commonClass}>Top 6: <span className='text-white'>{top25}</span></p>}
-      {modo === 'Squad' && <p className={commonClass}>Top 3: <span className='text-white'>{top10}</span></p>}
-      {modo === 'Squad' && <p className={commonClass}>Top 6: <span className='text-white'>{top25}</span></p>}
+      {modo === 'Solo' && <p className={commonClass}>Top 10:<span className='text-white'> {topN}</span></p>}
+      {modo === 'Solo' && <p className={commonClass}>Top 25: <span className='text-white'>{topNN}</span></p>}
+      {modo === 'Duo' && <p className={commonClass}>Top 5: <span className='text-white'>{topN}</span></p>}
+      {modo === 'Duo' && <p className={commonClass}>Top 12: <span className='text-white'>{topNN}</span></p>}
+      {modo === 'Trio' && <p className={commonClass}>Top 3: <span className='text-white'>{topN}</span></p>}
+      {modo === 'Trio' && <p className={commonClass}>Top 6: <span className='text-white'>{topNN}</span></p>}
+      {modo === 'Squad' && <p className={commonClass}>Top 3: <span className='text-white'>{topN}</span></p>}
+      {modo === 'Squad' && <p className={commonClass}>Top 6: <span className='text-white'>{topNN}</span></p>}
       {modo !== 'Trio' && <p className={commonClass}>Muertes: <span className='text-white'>{deaths}</span></p>}
       <p className={commonClass}>K / D: <span className='text-white'>{kda}</span></p>
       <p className={commonClass}>Partidas: <span className='text-white'>{matches}</span></p>
