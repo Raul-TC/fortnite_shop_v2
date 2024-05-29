@@ -1,11 +1,32 @@
 import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io'
 import { TiMicrophone } from 'react-icons/ti'
-import { TbLego } from 'react-icons/tb'
+import { TbLego, TbPick, TbParachute } from 'react-icons/tb'
 import { FaMusic } from 'react-icons/fa6'
 import { AiFillSkin } from 'react-icons/ai'
-
+import { BsBackpack } from 'react-icons/bs'
+import { MdOutlinePets } from 'react-icons/md'
+import { BiSolidSprayCan } from 'react-icons/bi'
+import { LuFlower } from 'react-icons/lu'
+import gesto from '../assets/gestoSVG.svg'
+import envoltorio from '../assets/wrapper.svg'
+import pantalla from '../assets/pantallaCarga.svg'
 function capitalize (str) {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
+}
+const iconComponents = {
+  Música: { icon: <FaMusic />, text: 'Música' },
+  'Pista de improvisación': { icon: <TiMicrophone />, text: 'Pista de improvisación' },
+  'Kit de LEGO®': { icon: <TbLego />, text: 'Kit de LEGO®' },
+  Traje: { icon: <AiFillSkin />, text: 'Traje' },
+  Mochila: { icon: <BsBackpack />, text: 'Mochila' },
+  Pico: { icon: <TbPick />, text: 'Pico' },
+  'Ala delta': { icon: <TbParachute />, text: 'Ala delta' },
+  Mascota: { icon: <MdOutlinePets />, text: 'Mascota' },
+  Grafiti: { icon: <BiSolidSprayCan />, text: 'Grafiti' },
+  Decoración: { icon: <LuFlower />, text: 'Decoración' },
+  Gesto: { icon: <img src={gesto.src} alt='' className='' />, text: 'Gesto' },
+  Envoltorio: { icon: <img src={envoltorio.src} alt='' className='' />, text: 'Envoltorio' },
+  'Pantalla de carga': { icon: <img src={pantalla.src} alt='' className='' />, text: 'Pantalla de carga' }
 }
 const Menu = ({ nameType, index, value, expandedItem, handleFilters, filters, handleExpandItem }) => {
   return (
@@ -27,14 +48,21 @@ const Menu = ({ nameType, index, value, expandedItem, handleFilters, filters, ha
                 handleFilters(prevTypes => ({ ...prevTypes, [nameType]: el.name }))
                 handleExpandItem(!expandedItem)
               }}
-              className='cursor-pointer flex gap-2 whitespace-nowrap overflow-hidden pl-4'
+              className='cursor-pointer flex gap-2 whitespace-nowrap overflow-hidden items-center  pl-4'
             >
-              {el.colors?.Color1 && <span style={{ backgroundColor: `${el.colors?.Color1}` }} className='min-w-4 w-4 h-4 rounded-full block mx-2' />}
-              {el?.name === 'Traje' && <span className='min-w-4 w-4 h-4 '><AiFillSkin /></span>}
-              {el?.name === 'Música' && <span className='min-w-4 w-4 h-4 '><FaMusic /></span>}
-              {el?.name === 'Pista de improvisación' && <span className='min-w-4 w-4 h-4 '><TiMicrophone /></span>}
-              {el?.name === 'Kit de LEGO®' && <span className='min-w-4 w-4 h-4 '><TbLego /></span>}
-              <span className='text-ellipsis'>{capitalize(el.name)}</span>
+              {iconComponents[el.name]
+                ? (
+                  <>
+                    <span className='min-w-4 w-4 h-4'>{iconComponents[el.name].icon}</span>
+                    <span className='text-ellipsis  overflow-hidden'>{iconComponents[el.name].text}</span>
+                  </>
+                  )
+                : (
+                  <>
+                    {el.colors?.Color1 && <span style={{ backgroundColor: `${el.colors?.Color1}` }} className='min-w-4 h-4 rounded-full block' />}
+                    <span className={`${el.colors?.Color1 ? 'text-ellipsis overflow-hidden pr-1' : 'm-auto'}`}>{capitalize(el.name)}</span>
+                  </>
+                  )}
             </i>
           )
         })}
