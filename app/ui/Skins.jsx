@@ -33,7 +33,7 @@ const Skins = ({ allCosmetics, rarities }) => {
           {data.map((child, index) =>
             <Link
               key={`${index}_${child.id}`}
-              href={`/shop/${child.id}`}
+              href={`/cosmetics/${child.id}`}
               className=' rounded-lg self-start cursor-pointer '
             >
               <div className='relative w-full h-full overflow-hidden rounded-md'>

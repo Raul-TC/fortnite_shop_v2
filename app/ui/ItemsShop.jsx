@@ -2,9 +2,10 @@ import Link from 'next/link'
 import ImageSlider from './ImageSlider'
 import BackgroundCard from './BackgroundCard'
 import { luckiestGuy } from '../ui/fonts'
+import { getShop } from '../lib/data'
 
-const ItemsShop = async ({ shop }) => {
-  // console.log(shop)
+const ItemsShop = async () => {
+  const shop = await getShop()
 
   return (
     <>
@@ -16,7 +17,7 @@ const ItemsShop = async ({ shop }) => {
               return (child.displayAssets.length > 0 && (
                 <Link
                   key={`${index}_${child.mainId}`}
-                  href={`/shop/${child.mainId}`}
+                  href={`/cosmetics/${child.mainId}`}
                   className={`${child.displayName.includes('Lote') || child.displayName.includes('LOTE') || child.displayName.includes('PAQUETE') || child.displayName.includes('Pack') || el.section.includes('Lotes') ? 'col-span-2 row-span-2 order-[-1] ' : 'text-xs'} rounded-md overflow-hidden self-start cursor-pointer w-full `}
                 >
 
@@ -25,9 +26,14 @@ const ItemsShop = async ({ shop }) => {
                       <div className='flex w-full h-full overflow-hidden rounded-md flex-col items-center justify-center '>
                         <div className='relative top-0 bottom-0 h-full w-full overflow-hidden z-0'>
 
-                          <ImageSlider displayName={child.displayName} arrayImages={child.displayAssets} key={`${index}_${child.mainId}${Math.random()}`} price={child.price.regularPrice} isItem={false} bg={child.bg} />
-                          {/* <img src={child.bg} alt='' className='absolute top-0 bottom-0 left-0 right-0 -z-0' /> */}
-                          {/* <img src={child.displayAssets[0].background} alt={`image_${child.displayName}`} className='w-full h-full rounded-md relative top-0 bottom-0 left-0 right-0' /> */}
+                          <ImageSlider
+                            key={`${index}_${child.mainId}${Math.random()}`}
+                            displayName={child.displayName}
+                            arrayImages={child.displayAssets}
+                            price={child.price.regularPrice}
+                            isItem={false}
+                            bg={child.bg}
+                          />
 
                         </div>
                       </div>

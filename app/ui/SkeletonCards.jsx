@@ -1,7 +1,7 @@
 const Skeleton = () => {
   return (
     <>
-      <div className='m-auto animate-pulse my-4 bg-gray-400 rounded-lg block' />
+      <div className='m-auto animate-pulse my-4 h-6 w-32 bg-gray-400 rounded-lg block' />
       <div className='text-center grid md:grid-cols-6 md:grid-rows-2 gap-2 grid-flow-dense flex-wrap'>
 
         {[...Array(9)].map((card, index) => (
@@ -19,6 +19,8 @@ const Skeleton = () => {
 const SkeletonCards = () => {
   return (
     <>
+      <div className='m-auto animate-pulse my-4 h-6 w-48 bg-gray-400 rounded-lg block' />
+      <div className='m-auto animate-pulse my-4 h-6 w-36 bg-gray-400 rounded-lg block mb-6' />
 
       {[...Array(3)].map((card, index) => (
 
