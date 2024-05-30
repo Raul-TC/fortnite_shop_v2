@@ -40,7 +40,6 @@ const SkeletonItem = () => {
         </div>
 
       </div>
-      {/* <div className='animate-pulse bg-gray-400 min-w-[40%] max-w-[60%] h-10 m-auto rounded-md' /> */}
     </div>
   )
 }

@@ -4,9 +4,12 @@ import CurrentDay from './CurrentDay'
 import CountDown from './CountDown'
 import { rewardsFiltered } from '../lib/utils'
 import BackgroundCard from './BackgroundCard'
-const BattlePass = ({ bpass, currentPage }) => {
-  const { arr, info, seasonDates, videos } = bpass
+import { getBattlePass } from '../lib/data'
+const BattlePass = async ({ currentPage }) => {
   const { formatedDate } = useFormatedDate()
+  const { arr, info, seasonDates, videos } = await getBattlePass()
+
+  console.log(seasonDates)
   const [date] = new Date(seasonDates.end).toISOString().split('T')
   const rewards = rewardsFiltered(arr, currentPage)
   return (

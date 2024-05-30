@@ -1,4 +1,4 @@
-import { URL_RARITIES, URL_STATS, URL_STATS_SEASON } from '@/KEY'
+import { URL_BPASS, URL_RARITIES, URL_STATS, URL_STATS_SEASON } from '@/KEY'
 
 export async function getStats (name, accountType) {
   try {
@@ -71,5 +71,38 @@ export async function getRarities () {
     return { rarities, series }
   } catch (error) {
 
+  }
+}
+
+export async function getBattlePass () {
+  try {
+    const fetchBp = await fetch(URL_BPASS, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: process.env.API_FORTNITE
+      }
+    })
+    if (!fetchBp.ok) {
+      throw new Error(`Error al obtener el pase de batalla 😔: ${fetchBp.status} ${fetchBp.statusText}`)
+    }
+
+    const res = await fetchBp.json()
+
+    const pagesBattlePass = {}
+    const pages = [...new Set(res.rewards.map((item) => item.page))]
+    console.log(res)
+    pages.forEach(el => { pagesBattlePass[el] = [] })
+    res.rewards.forEach(el => {
+      const datt = pagesBattlePass[el.page].map(ab => ab.offerId === el.offerId)
+
+      !datt.includes(true) && pagesBattlePass[el.page].push({ ...el })
+    })
+
+    const arr = Object.entries(pagesBattlePass).map(([key, value]) => ({ page: key, data: value }))
+
+    return { arr, info: res.displayInfo, seasonDates: res.seasonDates, videos: res.videos }
+  } catch (error) {
+    console.log(error)
+    return { error }
   }
 }
