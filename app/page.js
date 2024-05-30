@@ -5,8 +5,8 @@ import { getBattlePass } from './lib/data'
 import SkeletonHome from './ui/SkeletonHome'
 
 export const metadata = {
-  title: 'Fortnite - Home',
-  description: 'Fornite Shop Today',
+  title: 'Inicio',
+  description: 'Pase de Batalla Actual de Fortnite',
   icons: { shortcut: 'https://cdn.marketing.on.epicgames.com/fortnite/webpack/../favicon.ico' },
   facebook: {
     card: '',

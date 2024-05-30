@@ -1,4 +1,4 @@
-import { URL_BPASS, URL_RARITIES, URL_STATS, URL_STATS_SEASON } from '@/KEY'
+import { URL_BPASS, URL_RARITIES, URL_SHOP, URL_STATS, URL_STATS_SEASON } from '@/KEY'
 
 export async function getStats (name, accountType) {
   try {
@@ -90,9 +90,20 @@ export async function getBattlePass () {
 
     const pagesBattlePass = {}
     const pages = [...new Set(res.rewards.map((item) => item.page))]
-    console.log(res)
+    console.log(res.rewards)
     pages.forEach(el => { pagesBattlePass[el] = [] })
-    res.rewards.forEach(el => {
+
+    const { rarities } = await getRarities()
+
+    const raritiesMap = Object.fromEntries(rarities.map(el => [el.name.toUpperCase(), el.image]))
+
+    console.log(raritiesMap)
+    const addBg = res.rewards.map(el => {
+      const bgDefault = raritiesMap[el.item.rarity?.name.toUpperCase()] || ''
+
+      return { ...el, bg: bgDefault }
+    })
+    addBg.forEach(el => {
       const datt = pagesBattlePass[el.page].map(ab => ab.offerId === el.offerId)
 
       !datt.includes(true) && pagesBattlePass[el.page].push({ ...el })
@@ -101,6 +112,61 @@ export async function getBattlePass () {
     const arr = Object.entries(pagesBattlePass).map(([key, value]) => ({ page: key, data: value }))
 
     return { arr, info: res.displayInfo, seasonDates: res.seasonDates, videos: res.videos }
+  } catch (error) {
+    console.log(error)
+    return { error }
+  }
+}
+
+export async function getShop () {
+  try {
+    const fetchShop = await fetch(URL_SHOP, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: process.env.API_FORTNITE
+      },
+      next: { cache: 'no-store' }
+    })
+    if (!fetchShop.ok) {
+      throw new Error(`Error: ${fetchShop.status} ${fetchShop.statusText}`)
+    }
+    const { shop } = await fetchShop.json()
+
+    const dataFiltered = {}
+    const categories = [...new Set(shop.map((section) => section.section.name))]
+
+    categories.forEach(el => {
+      if (el === null || el === '' || el === false) {
+        dataFiltered.Destacados = []
+      } else {
+        dataFiltered[el] = []
+      }
+    })
+    const { rarities, series } = await getRarities()
+
+    const seriesMap = Object.fromEntries(series.map(el => [el.name.toUpperCase(), el.image]))
+    const raritiesMap = Object.fromEntries(rarities.map(el => [el.name.toUpperCase(), el.image]))
+
+    const addBg = shop.map(el => {
+      const bgImage = seriesMap[el.series?.name.toUpperCase()] || ''
+      const bgDefault = raritiesMap[el.rarity?.name.toUpperCase()] || ''
+
+      return { ...el, bg: bgImage, bgDefault }
+    })
+
+    addBg.forEach(item => {
+      if (!dataFiltered[item.section.name]) {
+        dataFiltered.Destacados.push({ ...item })
+      } else {
+        const datt = dataFiltered[item.section.name].map(ab => {
+          return ab.displayName === item.displayName
+        })
+
+        !datt.includes(true) && dataFiltered[item.section.name].push({ ...item })
+      }
+    })
+
+    return Object.entries(dataFiltered).map(([key, value]) => ({ section: key, data: value }))
   } catch (error) {
     console.log(error)
     return { error }
