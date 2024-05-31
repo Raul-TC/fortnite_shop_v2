@@ -28,7 +28,6 @@ export async function getItem (id) {
     })
 
     if (!fetchItem.ok) {
-      console.log(fetchItem)
       throw new Error(`Error in 1rst Fetch: ${fetchItem.status} ${fetchItem.statusText}`)
     }
 
@@ -73,7 +72,7 @@ export async function generateMetadata (params, parent) {
       description: resp.item.name,
       facebook: {
         card: '',
-        title: 'Tienda de HOY Fortnite',
+        title: `${resp.item.name}`,
         description: `Skin ${resp.item.name}`
       }
     }

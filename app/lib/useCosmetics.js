@@ -5,7 +5,6 @@ export const useCosmetics = (allCosmetics) => {
   const [data, setData] = useState(allCosmetics.slice(0, 50))
   const [displayCount, setDisplayCount] = useState(50)
   const [filters, setFilters] = useState({ rareza: 'Todas', series: 'Todas', tipos: 'Todas', search: '' })
-  // const [expandedItem, setExpandedItem] = useState(null)
 
   const loadMoreData = () => {
     setDisplayCount(prevCount => prevCount + 50)
@@ -20,7 +19,6 @@ export const useCosmetics = (allCosmetics) => {
 
     if (filters.rareza === 'Todas' && filters.series === 'Todas' && filters.tipos === 'Todas' && filters.search === '') {
       filteredData = allCosmetics
-      console.log('entro')
     }
 
     if (filters.rareza !== 'Todas') {

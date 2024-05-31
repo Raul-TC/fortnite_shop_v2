@@ -27,7 +27,7 @@ const PlayerStats = async ({ name, accountType }) => {
       minute: 'numeric',
       second: 'numeric',
       hour12: true,
-      timeZone: 'America/Monterrey' // Cambia esto a tu zona horaria local
+      timeZone: 'America/Monterrey'
     }
 
     return date.toLocaleString('es-MX', options)

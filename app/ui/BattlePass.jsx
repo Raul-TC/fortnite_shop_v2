@@ -36,7 +36,6 @@ const BattlePass = async ({ currentPage }) => {
           <h2 className='text-2xl text-center font-bold mt-4 mb-4 md:text-3xl'> Página {item.page}</h2>
           <div className='text-center grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3 grid-flow-dense h-full w-full'>
             {item.data.map((pag, index) => {
-              console.log(pag.bg)
               return (
                 <Link key={`${pag.offerId}_${index}`} className='relative w-full h-full' href={`/cosmetics/${pag.item.id}`} rareza='epica'>
                   <img

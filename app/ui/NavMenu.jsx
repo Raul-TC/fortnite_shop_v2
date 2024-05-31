@@ -15,9 +15,6 @@ const links = [
   },
   {
     name: 'Jugador', path: '/player'
-  },
-  {
-    name: 'Armas', path: '/weapons'
   }
 ]
 const NavMenu = ({ state, handleToggle }) => {

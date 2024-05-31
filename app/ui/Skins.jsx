@@ -6,8 +6,9 @@ import Menu from './Menu'
 import { useCosmetics } from '../lib/useCosmetics'
 import { useExpandItem } from '../lib/useExpandItem'
 
-const Skins = ({ allCosmetics, rarities }) => {
-  const { data, filters, loadMoreData, handleClick, handleFilters } = useCosmetics(allCosmetics)
+const Skins = ({ dataSkins }) => {
+  const { allitems, rarities } = dataSkins
+  const { data, filters, loadMoreData, handleClick, handleFilters } = useCosmetics(allitems)
   const { expandedItem, handleExpandItem } = useExpandItem()
   return (
     <>
@@ -27,7 +28,7 @@ const Skins = ({ allCosmetics, rarities }) => {
         })}
       </div>
       <InfiniteScroll
-        dataLength={data.length} hasMore={data.length < allCosmetics.length} next={loadMoreData}
+        dataLength={data.length} hasMore={data.length < allitems.length} next={loadMoreData}
       >
         <div className='text-center grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3 grid-flow-dense h-full w-full mt-8'>
           {data.map((child, index) =>

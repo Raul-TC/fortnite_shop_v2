@@ -1,4 +1,4 @@
-import { URL_BPASS, URL_RARITIES, URL_SHOP, URL_STATS, URL_STATS_SEASON } from '@/KEY'
+import { URL_BPASS, URL_COSMETICS, URL_RARITIES, URL_SHOP, URL_STATS, URL_STATS_SEASON } from '@/KEY'
 
 export async function getStats (name, accountType) {
   try {
@@ -11,7 +11,6 @@ export async function getStats (name, accountType) {
     })
 
     if (!fetchStats.ok) {
-      console.log(fetchStats)
       throw new Error(`Error in 1rst Fetch: ${fetchStats.status} ${fetchStats.statusText}`)
     }
 
@@ -48,7 +47,6 @@ export async function getStats (name, accountType) {
 
     return data
   } catch (error) {
-    console.error('Error fetching stats:', error)
     return error
   }
 }
@@ -67,7 +65,6 @@ export async function getRarities () {
 
     const { rarities, series } = await getRarities.json()
 
-    console.log({ rarities, series })
     return { rarities, series }
   } catch (error) {
 
@@ -90,14 +87,12 @@ export async function getBattlePass () {
 
     const pagesBattlePass = {}
     const pages = [...new Set(res.rewards.map((item) => item.page))]
-    console.log(res.rewards)
     pages.forEach(el => { pagesBattlePass[el] = [] })
 
     const { rarities } = await getRarities()
 
     const raritiesMap = Object.fromEntries(rarities.map(el => [el.name.toUpperCase(), el.image]))
 
-    console.log(raritiesMap)
     const addBg = res.rewards.map(el => {
       const bgDefault = raritiesMap[el.item.rarity?.name.toUpperCase()] || ''
 
@@ -113,7 +108,6 @@ export async function getBattlePass () {
 
     return { arr, info: res.displayInfo, seasonDates: res.seasonDates, videos: res.videos }
   } catch (error) {
-    console.log(error)
     return { error }
   }
 }
@@ -168,7 +162,78 @@ export async function getShop () {
 
     return Object.entries(dataFiltered).map(([key, value]) => ({ section: key, data: value }))
   } catch (error) {
-    console.log(error)
     return { error }
+  }
+}
+
+export async function getCosmetics () {
+  try {
+    const getData = await fetch(URL_COSMETICS, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: process.env.API_FORTNITE
+      }
+    })
+
+    if (!getData.ok) {
+      throw new Error(`Error al obtener los cosmeticos: ${getData.status} ${getData.statusText}`)
+    }
+    const { items } = await getData.json()
+    const getRarities = await fetch(URL_RARITIES, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: process.env.API_FORTNITE
+      }
+    })
+    if (!getRarities.ok) {
+      throw new Error(`Error al obtener las rarezas: ${getRarities.status} ${getRarities.statusText}`)
+    }
+
+    const { rarities, series } = await getRarities.json()
+
+    const formatedDate = items.map(el => {
+      return { id: el.id, type: el.type, name: el.name, rarity: el.rarity, series: el.series, images: el.images, price: el.price }
+    })
+    const seriesMap = Object.fromEntries(series.map(el => [el.name.toUpperCase(), el.image]))
+    const raritiesMap = Object.fromEntries(rarities.map(el => [el.name.toUpperCase(), el.image]))
+
+    const addBg = formatedDate.map(el => {
+      const bgImage = seriesMap[el.series?.name.toUpperCase()] || ''
+      const bgDefault = raritiesMap[el.rarity?.name.toUpperCase()] || ''
+
+      if (el.type.name === 'itemaccess') {
+        return { ...el, type: { id: 'Pase de Batalla', name: 'Pase de Batalla' }, bg: bgImage, bgDefault }
+      }
+      return { ...el, bg: bgImage, bgDefault }
+    })
+
+    const filter = rarities.filter(el => el.name !== 'Exótico' && el.name !== 'MÍTICA' && el.name !== '')
+    const unique = {}
+    const tipos = addBg.filter(type => {
+      const key = `${type.type.name}`
+      if (!unique[key]) {
+        unique[key] = true
+        return true
+      }
+      return false
+    }).map(type => {
+      if (type.type.name === 'Accesorio mochilero') {
+        return ({ name: 'Mochila', id: 'Mochila' })
+      } else {
+        return ({ name: type.type.name, id: type.type.name })
+      }
+    })
+    const arrayFiltrado = tipos.filter(el => ['Traje', 'Pico', 'Gesto', 'Ala delta', 'Mochila', 'Mascota', 'Envoltorio', 'Grafiti', 'Música', 'Pista de improvisación', 'Pantalla de carga', 'Lote de Objetos', 'Kit de LEGO®', 'Decoración'].includes(el.name))
+
+    filter.unshift({ name: 'Todas', id: 'Todas' })
+    series.unshift({ name: 'Todas', id: 'Todas' })
+    arrayFiltrado.unshift({ name: 'Todas', id: 'Todas' })
+    return {
+      allitems: addBg,
+      rarities: [{ rareza: filter }, { series }, { tipos: arrayFiltrado }]
+
+    }
+  } catch (error) {
+    return error
   }
 }

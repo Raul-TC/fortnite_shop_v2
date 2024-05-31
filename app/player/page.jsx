@@ -4,6 +4,18 @@ import Search from '../ui/Search'
 import PlayerStats from '../ui/PlayerStats'
 import SkeletonStats from '../ui/SkeletonStats'
 export const dynamic = 'force-dynamic'
+
+export const metadata = {
+  title: 'Estadísticas del Jugador',
+  description: 'Busca tus estadísticas de esta temporada y de forma global',
+  icons: { shortcut: 'https://cdn.marketing.on.epicgames.com/fortnite/webpack/../favicon.ico' },
+  facebook: {
+    card: '',
+    title: 'Mis Estadísticas',
+    description: 'Busca tus estadísticas de esta temporada y de forma global'
+  }
+}
+
 const Player = async ({ searchParams }) => {
   const { name, accountType } = searchParams
   return (
